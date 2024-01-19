@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <style>
+        h1{text-align:center}
+    </style>
+</head>
+<body>
+    <h1>메인 페이지</h1>
+    <div style="text-align: center">
+        <a href="{% url 'account:signup' %}">회원가입</a>
+        <a href="{% url 'account:login' %}">로그인</a>
+    </div>
+</body>
+</html>
