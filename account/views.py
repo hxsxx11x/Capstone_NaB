@@ -42,13 +42,24 @@ def signup(request):
 
     return render(request, 'signup.html')
 
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')  # 'home'은 홈페이지의 URL 이름에 따라 수정하세요
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+def login(request):
+    response_data = {}
+    if request.method == "GET":
+        return render(request, 'login.html')
+
+    elif request.method == "POST":
+        login_email = request.POST.get('email', None)  # 딕셔너리형태
+        login_password = request.POST.get('password', None)
+
+        if not (login_email and login_password):
+            response_data['error'] = "이메일과 비밀번호를 입력해주세요"
+        if not (Account.objects.filter(mem_email=login_email).exists()):
+            response_data['error'] = "가입되지 않은 이메일입니다."
+        else:
+            account = Account.objects.get(mem_email=login_email)
+            if account.mem_password == login_password:
+                request.session['user'] = account.mem_email
+                return HttpResponse('로그인 성공')
+            else:
+                response_data['error'] = "비밀번호가 틀렸습니다"
+    return render(request, 'login.html', response_data)  # register를 요청받으면 register.html 로 응답.

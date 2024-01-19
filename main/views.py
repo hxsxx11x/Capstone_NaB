@@ -21,6 +21,7 @@ def signup_view(request):
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
 
+
 def logout_view(request):
     if request.method == 'POST':
         logout(request)
