@@ -44,3 +44,8 @@ def profile_view(request):
     context = {'username': account.username}
     return render(request, 'profile.html', context)
 
+def delete_view(request):
+    request.user.delete()
+    logout(request)
+    messages.success(request, '탈퇴 되었습니다.')
+    return redirect('main')
