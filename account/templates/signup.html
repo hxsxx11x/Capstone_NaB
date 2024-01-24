@@ -1,39 +1,40 @@
-<!-- accounts/templates/signup.html -->
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% block content %}
 <div class="wrapper" style="text-align: center;">
-        <h1>회원가입</h1>
-        {% if error %}
-            <p style="color: red;">{{ error }}</p>
-        {% endif %}
-        <form method="POST">
-            {% csrf_token %}
-            이메일: <br>
-            <input name="email" type="email">
-            <br>
-            비밀번호: <br>
-            <input name="password1" type="password">
-            <br>
-            비밀번호 확인: <br>
-            <input name="password2" type="password">
-            <br>
-            닉네임: <br>
-            <input name="username" type="username">
-            <br>
-            생일: <br>
-            <input name="birthday" type="date">
-            <br>
-            성별: <br>
-             <select name="gender">
-                <option value="man">남성</option>
-                <option value="woman">여성</option>
-                <option value="unsigned">미정</option>
-            </select>
-            <br><br>
-            <input type="submit" class="btn btn-primary" value="Sign Up">
-        </form>
+    <h1>회원가입</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="post" action="{% url 'account:signup' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="email">이메일</label>
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="username">사용자 이름</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="password1">비밀번호</label>
+            {{ form.password1 }}
+        </div>
+        <div class="mb-3">
+            <label for="password2">비밀번호 확인</label>
+            {{ form.password2 }}
+        </div>
+        <div class="mb-3">
+            <label for="gender">성별</label>
+            {{ form.gender }}
+        </div>
+        <div class="mb-3">
+            <label for="birthday">생년월일</label>
+            {{ form.birthday }}
+        </div>
+        <button type="submit" class="btn btn-primary">생성하기</button>
+    </form>
 </div>
 {% endblock %}

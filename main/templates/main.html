@@ -8,6 +8,11 @@
 </head>
 <body>
     <h1>메인 페이지</h1>
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div style="text-align: center">
         <a href="{% url 'account:signup' %}">회원가입</a>
         <a href="{% url 'account:login' %}">로그인</a>
