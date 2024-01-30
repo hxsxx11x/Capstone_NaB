@@ -1,7 +1,10 @@
 from django.shortcuts import render
-from .forms import ImageUploadForm
+#from .forms import ImageUploadForm
 
 import cv2
+import pytesseract
+import matplotlib.pyplot as plt
+import os
 import numpy as np
 
 from django.http import JsonResponse
@@ -33,3 +36,10 @@ cv2.imshow('Contour Detection', image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 '''
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+
+image = cv2.imread(r'C:\Users\22805\Downloads\2.png')
+rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+text = pytesseract.image_to_string(rgb_image, lang='kor')
+print(text)
