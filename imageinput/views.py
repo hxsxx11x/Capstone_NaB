@@ -1,6 +1,4 @@
 from django.shortcuts import render, redirect
-from .forms import FileUploadForm
-from .models import FileUpload
 import cv2
 import pytesseract
 import matplotlib.pyplot as plt
