@@ -1,19 +1,24 @@
-from django.shortcuts import render
-#from .forms import ImageUploadForm
-
+from django.shortcuts import render, redirect
+from .forms import FileUploadForm
+from .models import FileUpload
 import cv2
 import pytesseract
 import matplotlib.pyplot as plt
 import os
 import numpy as np
+from django.http import HttpResponse, JsonResponse
 
-from django.http import JsonResponse
-
-def image_upload(request):
-    if request.method == 'POST':
-        image = request.FILES.get('image')
-        return JsonResponse({'message': 'success', 'filename': image.name})
-    return render(request, 'image_upload.html')
+def fileupload(request):
+    if request.method == 'POST' and request.FILES['image']:
+        pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+        uploaded_image = request.FILES['image']
+        image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), cv2.IMREAD_COLOR)
+        rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        text = pytesseract.image_to_string(rgb_image, lang='kor')
+        print(text)
+        return HttpResponse(text)
+    else:
+        return render(request, 'image_upload.html')
 
 '''
 # 이미지 로드
@@ -37,9 +42,8 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 '''
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-
-image = cv2.imread(r'C:\Users\22805\Downloads\2.png')
-rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-text = pytesseract.image_to_string(rgb_image, lang='kor')
-print(text)
+#pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+# image = cv2.imread(r'C:\Users\22805\Downloads\2.png')
+# rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+# text = pytesseract.image_to_string(rgb_image, lang='kor')
+# print(text)

@@ -21,7 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-eqlhx5hqv5evr0*1mo@b70unmm4d_0++b*3(o8k3q+er_q(n0e'
+#SECRET_KEY = 'django-insecure-eqlhx5hqv5evr0*1mo@b70unmm4d_0++b*3(o8k3q+er_q(n0e' - 희수
+SECRET_KEY = 'django-insecure-5az!vlba5_omy85n+5r8o9jf^i9=qq@yl7la3cit@6c9c$j5sq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -115,9 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
@@ -137,3 +138,6 @@ STATICFILES_DIRS = [ BASE_DIR, "static", ]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/account/profile'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

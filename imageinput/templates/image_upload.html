@@ -1,29 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Image Upload</title>
-    <link href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-
-<form action="{% url 'image:upload' %}" class="dropzone" id="myDropzone">
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+  <form
+    method="POST"
+    action="{% url 'image:fileupload' %}"
+    enctype="multipart/form-data"
+  >
     {% csrf_token %}
-    <div class="fallback">
+    <input type="file" name="image">
+    <input type="submit" class="btn btn-primary col-12" value="제출" />
+  </form>
+</div>
+{% endblock %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Image Upload</title>
+    <link
+      href="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
+  <body>
+    <form action="{% url 'image:upload' %}" class="dropzone" id="myDropzone">
+      {% csrf_token %}
+      <div class="fallback">
         <input name="file" type="file" multiple />
-    </div>
-</form>
+      </div>
+    </form>
 
-<script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
-<script>
-    Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone("#myDropzone", {
+    <script src="https://unpkg.com/dropzone@6.0.0-beta.1/dist/dropzone-min.js"></script>
+    <script>
+      Dropzone.autoDiscover = false;
+      var myDropzone = new Dropzone("#myDropzone", {
         url: "{% url 'image:upload' %}",
         maxFilesize: 10, // MB
         paramName: "file",
-        acceptedFiles: "image/*"
-    });
-</script>
-
-</body>
+        acceptedFiles: "image/*",
+      });
+    </script>
+  </body>
 </html>
+{% endcomment %}
+
+<!-- fileupload/templates/fileupload.html -->
