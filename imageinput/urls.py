@@ -1,8 +1,8 @@
 from django.urls import path
 from .views import *
 
-app_name = 'image_upload'
+app_name = 'image'
 
 urlpatterns = [
-    path('upload/', fileupload, name='fileupload'),
+    path('upload/', fileupload, name='upload'),
 ]

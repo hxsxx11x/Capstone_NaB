@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import *
 from django.contrib.auth import views as auth_views
-
+from .views import *
+from imageinput.views import fileupload
 app_name = 'account'
 
 urlpatterns = [
@@ -10,4 +10,5 @@ urlpatterns = [
     path('profile/', profile_view, name='profile'),
     path('logout/', logout_view, name='logout'),
     path('delete/', delete_view, name='delete'),
+    path('upload/', fileupload, name='upload'),
 ]

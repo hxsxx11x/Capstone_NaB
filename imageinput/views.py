@@ -7,7 +7,7 @@ import numpy as np
 from django.http import HttpResponse, JsonResponse
 
 def fileupload(request):
-    if request.method == 'POST' and request.FILES['image']:
+    if request.method == 'POST' and 'image' in request.FILES:
         pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
         uploaded_image = request.FILES['image']
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), cv2.IMREAD_COLOR)

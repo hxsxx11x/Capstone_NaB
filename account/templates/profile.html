@@ -6,6 +6,11 @@
 <body>
     <h1>환영합니다, {{ username }}님!</h1>
 
+    <form action="{% url 'image:upload' %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="사진 업로드">
+    </form>d
+
     <form action="{% url 'account:logout' %}" method="post">
         {% csrf_token %}
         <input type="submit" value="로그아웃">
