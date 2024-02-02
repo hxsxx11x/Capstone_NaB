@@ -9,7 +9,7 @@
     <form action="{% url 'image:upload' %}" method="post">
         {% csrf_token %}
         <input type="submit" value="사진 업로드">
-    </form>d
+    </form>
 
     <form action="{% url 'account:logout' %}" method="post">
         {% csrf_token %}

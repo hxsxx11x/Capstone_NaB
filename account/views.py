@@ -30,14 +30,14 @@ def signup_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, '로그아웃 되었습니다.')
-    return redirect('main')
+    return redirect('/')
 
 def profile_view(request):
     # 세션에서 현재 사용자 정보 가져오기
     username = request.user.username
 
     if not username:
-        return redirect('login')  # 로그인 상태가 아니라면 로그인 페이지로 리다이렉트
+        return redirect('/')  # 로그인 상태가 아니라면 로그인 페이지로 리다이렉트
 
     # 사용자 정보를 가져오기
     account = User.objects.get(username=username)
@@ -48,4 +48,4 @@ def delete_view(request):
     request.user.delete()
     logout(request)
     messages.success(request, '탈퇴 되었습니다.')
-    return redirect('main')
+    return redirect('/')
