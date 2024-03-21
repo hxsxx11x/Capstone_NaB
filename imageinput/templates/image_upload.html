@@ -1,20 +1,28 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load bootstrap4 %}
+{% extends 'base.html' %} {% load static %} {% load bootstrap4 %}
 {% block content %}
+<div style="margin-top:30px;"></div>
+<h2 class="text-center bottom-border">이미지 업로드</h2>
+
 <div class="container">
+  <div>
+    <i
+      class="bi bi-arrow-left"
+      style="cursor: pointer"
+      onclick="history.back()"
+    ></i>
+    <span style="cursor: pointer" onclick="history.back()">뒤로가기</span>
+  </div>
   <form
     method="POST"
     action="{% url 'image:upload' %}"
     enctype="multipart/form-data"
   >
     {% csrf_token %}
-    <input type="file" name="image">
+    <input type="file" name="image" />
     <input type="submit" class="btn btn-primary col-12" value="제출" />
   </form>
 </div>
-{% endblock %}
-{% comment %} <!DOCTYPE html>
+{% endblock %} {% comment %} <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />

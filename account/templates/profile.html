@@ -1,24 +1,124 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
-    <title>환영 페이지</title>
-</head>
-<body>
-    <h1>환영합니다, {{ username }}님!</h1>
+  <head>
+    <title>프로필 화면</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}" />
+    <link
+      href="https://i.postimg.cc/xdmYFx3Q/1.png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <style>
+      .border-gray{
+        border: 2px rgb(128, 128, 128) solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="margin-top: 20px"></div>
+    <div
+      class="container border-gray"
+      style="
+        margin: 0px auto;
+        width: 1000px;
+        height: 100%;
+        margin-bottom: 30px;
+      "
+    >
+      <div style="margin-top: 30px"></div>
+      <div class="d-flex" style="margin-bottom: 20px">
+        <div
+          class="row justify-content-start col-sm-4"
+          style="margin-left: 15px; font-size: 25px"
+        >
+          <div id="current_date">
+            <script>
+              date = new Date();
+              year = date.getFullYear();
+              month = date.getMonth() + 1;
+              day = date.getDate();
+              document.getElementById("current_date").innerHTML =
+                year + "년 " + month + "월 " + day + "일";
+            </script>
+          </div>
+        </div>
+        <div
+          class="row justify-content-end col-sm-8"
+          style="margin-right: 15px"
+        >
+          <form action="{% url 'account:logout' %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-primary btn" type="submit" value="로그아웃">
+              로그아웃
+            </button>
+          </form>
+          <form action="{% url 'account:userInformation' %}" method="post">
+            {% csrf_token %}
+            <button
+              class="btn btn-primary btn"
+              type="submit"
+              value="내 정보수정"
+            >
+              개인 정보
+            </button>
+          </form>
+        </div>
+      </div>
 
-    <form action="{% url 'image:upload' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="사진 업로드">
-    </form>
+      <h3 style="text-align: center; margin-top: 40px">
+        환영합니다, {{ username }}님!
+      </h3>
+      <div class = "border-gray" style="margin-top: 40px; height: 300px;">
+        <h5 class="text-center bottom-border">사용자 정보</h5>
+        <p class="text-center" style="margin-top:80px;">아직 체성분 데이터가 없습니다.<br>체성분 결과지를 업로드해주세요!</p>
+      </div>
 
-    <form action="{% url 'account:logout' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="로그아웃">
-    </form>
+      <div class = "d-flex justify-content-between" style="margin-top: 40px">
+        <div class="border-gray" style="width: 330px">
+          <h5 class="text-center bottom-border">검사지 업로드</h5>
+          <form
+          style="margin-top:70px"
+          method="POST"
+          action="{% url 'image:upload' %}"
+          enctype="multipart/form-data"
+          >
+          {% csrf_token %}
+          <input style="margin-top:5px;"type="file" name="image" />
+          <div style="margin-top:15px"></div>
+          <input type="submit" class="btn btn-primary col-12" value="업로드" />
+          </form>
+        </div>
+        
+        <div class = "border-gray" style="width: 330px; height: 200px;">
+            <h5 class="text-center bottom-border">오늘의 식단</h5>
+            <!--
+            <p class="row" style="margin-left:10px; font-size:16px">아침:</p>
+            <p class="row" style="margin-left:10px; font-size:16px" >점심:</p>
+            <p class="row" style="margin-left:10px; font-size:16px">저녁:</p>
+            -->
+            <p class="row" style="margin-left:113px; font-size:16px">업데이트 예정</p>
+            <a class = "row justify-content-center" href="{% url 'account:dietmenu'%}"> 자세히 보기</a>
+        </div>
+      </div>
+      <div class = "border-gray" style="margin-top: 40px; height: 300px;">
+        <h5 class="text-center bottom-border">체성분 그래프</h5>
 
-    <form action="{% url 'account:delete' %}" method="post">
-        {% csrf_token %}
-        <input type="submit" value="탈퇴">
-    </form>
-</body>
+        {% load static %}
+        <h6 class="text-center">예시</h6>
+        <img
+        src="{% static 'example_biagraph.png' %}"
+        style="display: block; margin: 0px auto; max-width: 100%; height: auto;"
+        />
+
+        <a class = "row justify-content-center" href="{% url 'account:biagraph'%}"> 자세히 보기</a>
+      </div>
+      <div style="margin-top: 30px"></div>
+    </div>
+  </body>
 </html>

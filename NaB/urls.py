@@ -11,4 +11,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('image/', include('imageinput.urls', namespace='image')),
     path('biaengine/', include('biaengine.urls', namespace='biaengine')),
+    path('significants/', include('significants.urls', namespace='significants'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -32,7 +32,7 @@ export-env {
       }
     }
 
-    let virtual_env = 'C:\Users\22805\Desktop\tukorea\capstone\NaB'
+    let virtual_env = 'C:\Users\22805\Desktop\bionever\factory\NaB'
     let bin = 'Scripts'
 
     let is_windows = ($nu.os-info.family) == 'windows'

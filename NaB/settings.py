@@ -21,13 +21,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-eqlhx5hqv5evr0*1mo@b70unmm4d_0++b*3(o8k3q+er_q(n0e'  # 희수
-#SECRET_KEY = 'django-insecure-5az!vlba5_omy85n+5r8o9jf^i9=qq@yl7la3cit@6c9c$j5sq'  # 상호
+#SECRET_KEY = 'django-insecure-eqlhx5hqv5evr0*1mo@b70unmm4d_0++b*3(o8k3q+er_q(n0e'  # 희수
+SECRET_KEY = 'django-insecure-5az!vlba5_omy85n+5r8o9jf^i9=qq@yl7la3cit@6c9c$j5sq'  # 상호
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -42,21 +42,25 @@ INSTALLED_APPS = [
     'bootstrap4',
     'main',
     'account',
-    'imageinput'
+    'imageinput',
+    'biaengine',
+    'NaB',
+    'significants'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'NaB.urls'
-
+# CSRF_TRUSTED_ORIGINS = ["https://192.168.56.1:8321"]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -129,7 +133,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ BASE_DIR, "static", ]
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 
 # Default primary key field type
@@ -141,3 +147,9 @@ LOGIN_REDIRECT_URL = '/account/profile'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SESSION_EXPIRE_SECONDS = 3600  # 1 hour
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True # 활동을 멈춘 시간부터 SESSION_EXPIRE_SECONDS 측정됨
+SESSION_TIMEOUT_REDIRECT = 'http://127.0.0.1:8000/account/'
+
+AUTH_USER_MODEL = 'account.CustomUser'

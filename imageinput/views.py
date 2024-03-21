@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from imutils.perspective import four_point_transform
 from imutils.contours import sort_contours
+from main.models import UserBia
+from datetime import datetime
+from django.contrib.auth.decorators import login_required
 import matplotlib.pyplot as plt
 import pytesseract
 import imutils
@@ -39,6 +42,7 @@ def fileupload(request):
         fat =  re.findall(r'Fat Mass\s*(\d{2}\.\d{1})', results_string)
         BMI = re.findall(r'(\d{2}\.\d{1})\s*제지방량', results_string)
         percent_fat = re.findall(r'Percent Body Fat\s*(\d{2}\.\d{1})', results_string)
+        bmr = re.findall(r'기초대사량\s*(\d{4})', results_string)
 
 
         print(height[-1])
@@ -47,9 +51,42 @@ def fileupload(request):
         print(fat[-1])
         print(BMI[-1])
         print(percent_fat[-1])
+        print(bmr[0])
 
 
-        return HttpResponse(results)
+
+        user_bia = UserBia(
+            date = datetime.now(),
+            username = request.user.username,
+            age = 25, #calculate_age(request.user.birthday)
+            height=float(height[-1]) if height else 0,
+            weight=float(weight[-1]) if weight else 0,
+            skeletal=float(skeletal[0]) if skeletal else 0,
+            fat=float(fat[-1]) if fat else 0,
+            fat_per = float(percent_fat[-1]) if percent_fat else 0,
+            bmi=float(BMI[-1]) if BMI else 0,
+            status = (0),
+            bmr = float(bmr[0]) if bmr else 0)
+        user_bia.save()
+
+        '''
+            bia_num = models.AutoField(primary_key=True)
+            date = models.DateField()
+            username = models.CharField(max_length=100)
+            age = models.IntegerField()
+            height = models.FloatField()
+            weight = models.FloatField()
+            skeletal = models.FloatField()
+            fat = models.FloatField()
+            fat_per = models.FloatField()
+            bmi = models.FloatField()
+            status = models.CharField(max_length=100)
+            bmr = models.FloatField()
+        '''
+
+
+        #return redirect('biaengine:status')
+        return redirect('significants:significants')
 
 
         '''
@@ -63,7 +100,14 @@ def fileupload(request):
     else:
         return render(request, 'image_upload.html')
 
+def calculate_age(birthday):
+    today = datetime.now().date()
+    age = today.year - birthday.year
+    if (today.month, today.day) < (birthday.month, birthday.day):
+        age -= 1
+    return age
 
+@login_required
 def make_scan_image(image, width, ksize=(5, 5), min_threshold=75, max_threshold=200):
     image_list_title = []
     image_list = []
@@ -101,6 +145,7 @@ def make_scan_image(image, width, ksize=(5, 5), min_threshold=75, max_threshold=
 
     return org_image
 
+@login_required
 def display_image(image, window_name='Image'):
     cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)  # 윈도우 크기를 조정할 수 있는 창 생성
     cv2.imshow(window_name, image)  # 이미지를 창에 표시

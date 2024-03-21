@@ -1,45 +1,110 @@
 <html>
-
-    <head>
-         <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
     <title>로그인 페이지</title>
-    </head>
-    <body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1>로그인</h1>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-6">
-                <form method="post" action="{% url 'account:login' %}">
-                    {% csrf_token %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                    <div class="form-group">
-                        <label for="email">이메일</label>
-                        <input type="text" class="form-control" name="username" id="username" placeholder="아이디를 입력하세요">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">비밀번호</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="비밀번호를 입력하세요">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">로그인</button>
-                    <br>
-                    <span style="color:red;"><strong>{{ error }}</strong> </span>
-                </form>
-                 <a href="{% url 'account:signup' %}">회원가입</a>
-            </div>
-        </div>
+    <link
+      href="https://i.postimg.cc/xdmYFx3Q/1.png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <div style="margin-top: 40px"></div>
+    <div>
+      <img
+        src="https://i.postimg.cc/GmXqqg15/image.png"
+        style="display: block; margin: 0px auto"
+      />
+      {% comment %} https://i.postimg.cc/9FLcKwgK/image.png {% endcomment %}
     </div>
-</body>
+    <div class="container mt-5" style="max-width: 700px">
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <form method="post" action="{% url 'account:login' %}">
+            {% csrf_token %} {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+            <div
+              style="
+                text-align: center;
+                margin-bottom: 16px;
+                font-size: large;
+                font-weight: bold;
+              "
+            >
+              NAB계정으로 로그인
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                id="username"
+                placeholder="아이디를 입력하세요"
+              />
+            </div>
+
+            <div class="form-group">
+              <input
+                type="password"
+                name="password"
+                class="form-control"
+                id="password"
+                placeholder="비밀번호를 입력하세요"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%">
+              로그인
+            </button>
+            <span style="color: red"><strong>{{ error }}</strong> </span>
+          </form>
+          <div style="margin-top: 5px"></div>
+          <div class="row justify-content-center">
+            <a style="font-size: 0.9rem" href="{% url 'account:signup' %}"
+              >회원가입</a
+            >
+            <a
+              style="
+                display: inline-block;
+                margin: 5px;
+                width: 1px;
+                height: 15px;
+                background-color: black;
+              "
+            ></a>
+            <a style="font-size: 0.9rem">아이디 찾기</a>
+            <a
+              style="
+                display: inline-block;
+                margin: 5px;
+                width: 1px;
+                height: 15px;
+                background-color: black;
+              "
+            ></a>
+            <a style="font-size: 0.9rem">비밀번호 찾기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p
+      style="
+        font-size: 0.9rem;
+        text-align: center;
+        color: gray;
+        margin-top: 10px;
+      "
+    >
+      회원으로 이용하시는 경우 개인 정보가 저장되어 빠른 분석이 가능합니다
+    </p>
+  </body>
 </html>

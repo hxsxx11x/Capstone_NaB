@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\22805\Desktop\tukorea\capstone\NaB"
+@set "VIRTUAL_ENV=C:\Users\22805\Desktop\bionever\factory\NaB"
 
 @set "VIRTUAL_ENV_PROMPT="
 @if NOT DEFINED VIRTUAL_ENV_PROMPT (
