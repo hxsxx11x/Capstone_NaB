@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>선택된 특이사항창</title>
+</head>
+<body>
+    <h2>선택된 특이사항들입니다.</h2>
+    <ul>
+        {% for significant in checked_significants %}
+            <li>{{ significant }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
