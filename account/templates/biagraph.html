@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체성분 기록</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+    <link
+      href="https://i.postimg.cc/xdmYFx3Q/1.png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            cursor: pointer;
+            color: #007bff;
+        }
+
+        .date-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 20px;
+            color: #555;
+        }
+
+        .graph-section {
+            margin-top: 30px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            height: 500px;
+        }
+
+        .meal-title {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #333; /* Change text color to black */
+        }
+        .date-border{
+          border: 2px solid #ccc;
+          border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+  <h1 class="text-center bottom-border">체성분 기록</h1>
+<div class="container">
+    <div>
+        <i class="bi bi-arrow-left back-btn" onclick="history.back()"></i>
+        <span class="back-btn" onclick="history.back()">뒤로가기</span>
+    </div>
+
+    <div class="d-flex justify-content-center date-border" style="font-size:30px; margin-top:10px"> 
+      <div id="current_date">
+        <script>
+          date = new Date();
+          year = date.getFullYear();
+          month = date.getMonth() + 1;
+          day = date.getDate();
+          document.getElementById("current_date").innerHTML =
+            year + "년 " + month + "월 " + day + "일";
+        </script>
+      </div>
+    </div>
+
+    <div class="graph-section">
+        <h3 class="meal-title">체성분 기록 그래프</h3>
+    </div>
+    <div class="graph-section">
+        <h3 class="meal-title">선택 날짜 체성분 정보</h3>
+        <div class="date-info">
+            <label for="selected-date">날짜 선택:</label>
+            <input type="date" id="selected-date">
+            <button onclick="changeDate()">선택</button>
+        </div>
+    </div>
+        
+    </div>
+</div>
+</body>
+</html>

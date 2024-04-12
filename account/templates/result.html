@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>상태 표시</title>
+        <style>
+        .status-title {
+            font-size: 2rem;
+            text-align: center;
+        }
+        .status-highlight {
+            font-size: 3rem;
+            text-align: center;
+            display: block;
+        }
+        .status-description p {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .table th, .table td {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="status-title">{{ user_id }}님의 현재 상태는</div>
+    <div class="status-highlight">{{ status }}입니다!</div>
+
+    <div class="status-description">
+        {% if status == "저체중" %}
+        <p>체중이 평균치보다 낮고 근육량도 적어요!<br>
+        저체중이 지속되면 빈혈 등 건강 문제로 이어질 수 있어요.<br>
+        근력 위주의 운동과 증량 목적의 식단을 추천해드릴게요!</p>
+
+        {% elif status == "적정체중" %}
+        <p>체중과 근육량, 체지방률이 평균치에 가까워요!<br>
+        현재 체중을 유지하며 근육량을 늘리면 더 건강해질 수 있어요.
+        근력 위주의 운동과 식단을 추천해드릴게요!</p>
+
+        {% elif status == "근육형 적정체중" %}
+        <p>체중이 평균치에 가깝고 근육량이 평균 이상이에요!<br>
+        현재 체중을 유지하며 꾸준히 운동하면 건강 걱정은 없겠어요.<br>
+        근력 위주의 운동과 식단을 추천해드릴게요!</p>
+
+        {% elif status == "근육형 과체중" %}
+        <p>체중이 평균치보다 조금 높지만, 근육량도 평균 이상이에요!<br>
+        체중을 조금 감량하며 꾸준히 운동하면 더 건강해질 수 있어요.<br>
+        체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
+
+        {% elif status == "과체중" %}
+        <p>체중이 평균치보다 조금 높아요!<br>
+        체중을 조금 감량하며 근육량을 늘리면 금방 적정 체중이 될 수 있어요.<br>
+        체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
+
+        {% elif status == "1단계 비만" %}
+        <p>체중과 체지방률이 높아요!<br>
+        운동과 식단을 병행하며 체중 감량을 해야 건강을 유지할 수 있어요.<br>
+        체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
+
+        {% elif status == "2단계 비만" %}
+        <p>체중과 체지방률이 많이 높아요!<br>
+        당장 체중을 감량하지 않으면 성인병의 위험이 매우 높아요.<br>
+        체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
+
+        {% else %}
+        <p>체중과 체지방률이 위험한 수준이에요!<br>
+        고도 비만으로 분류되며 체중 감량이 없으면 건강이 위험해요.<br>
+        체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>{% endif %}
+    </div>
+
+    <div class="container mt-5">
+        <h3 class="text-center">{{ user_id }}님의 주간 운동 계획</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>요일</th>
+                    <th>운동 목록</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for day, exercises in day_workouts.items %}
+                    <tr>
+                        <td>{{ day }}</td>
+                        <td>
+                            {% if day == "일" %}
+                                일요일은 쉬는 날!
+                            {% else %}
+                                {% for exercise in exercises %}
+                                    {{ exercise.name }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+        <p style="font-size: 1.2rem" class="text-center mt-4">
+            허리 부상이 있으시다고 체크해주셨기 때문에,<br>
+            허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
+        </p>
+    <div class="text-center mt-4">
+        <a href="{% url 'account:profile' %}" class="btn btn-primary">메인 화면으로 돌아갈까요?</a>
+    </div>
+</body>
+</html>
