@@ -76,12 +76,12 @@ def make_model():
     #모델 구조 확인 -> 역피라미드 형태(점점 결과값에 수렴해 가기 위함)
     bia_model.summary()
 
+    #Adam과 CategoricalCrossentropy사용
     bia_model.compile(
         optimizer=keras.optimizers.Adam(learning_rate),
         loss=keras.losses.CategoricalCrossentropy(),
         metrics=['accuracy']
     )
-    #Adam과 CategoricalCrossentropy사용
 
     #학습 전 예측
     predictions = bia_model.predict(data_bia_train_val[:1])
