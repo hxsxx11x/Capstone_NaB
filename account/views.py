@@ -8,6 +8,8 @@ from main.models import UserBia, WorkoutData
 from .models import CustomUser, CustomUserManager
 from .forms import UserForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
+from .models import SelectedWorkout
+
 
 
 def signup_view(request):
@@ -162,3 +164,9 @@ def result_view(request):
     }
 
     return render(request, 'result.html', context)
+#정현욱 분석결과 db에 저장
+def save_selected_workouts(user, selected_workouts):
+    for day, workouts in selected_workouts.items():
+        for workout, significant in workouts.items():
+            selected_workout = SelectedWorkout(user=user, workout_name=workout, significant_body_part=significant)
+            selected_workout.save()
