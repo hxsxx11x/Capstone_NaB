@@ -10,6 +10,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
+     {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" /> 부트스트랩4 온라인 링크 오류날 시 사용{% endcomment %}
+  
     <link rel="stylesheet" href="{% static 'css/basic.css' %}" />
     <link
       href="https://i.postimg.cc/xdmYFx3Q/1.png"
@@ -27,64 +29,70 @@
         display: inline-block;
         width: 100%;
         height: 100%;
-        border: 2px solid black;
+        border: 1px solid #E1E3E1;
         padding: 10px;
-      }
-      .back-btn {
-        cursor: pointer;
-        color: #007bff;
       }
     </style>
   </head>
   <body>
-    <div style="margin-top: 30px"></div>
-    <h1 class="text-center bottom-border">개인 정보 수정</h1>
+    <nav class="navigator" style="min-width:400px">
+      <a class="logo" href="http://127.0.0.1:8000/account/">
+        <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
+      </a>
+    <ul style="float:right;">
+      <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/image/upload/">체성분 분석</a></li>
+      <li class="list_left"><a class="nav_a font">운동 및 식단</a></li>
+      <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/userInformation">마이페이지</a></li>
+      <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/logout">로그아웃</a></li>
+    </ul>
+  </nav>
     <div class="container">
-      <div>
+      <h1 class="text-center bottom-border font">개인 정보 수정</h1>
+      <div style="margin-bottom:10px;">
         <i
           class="bi bi-arrow-left back-btn"
           style="cursor: pointer"
           onclick="history.back()"
         ></i> 
-        <span class="back-btn"style="cursor: pointer" onclick="history.back()">뒤로가기</span>
+        <span class="back-btn font"style="cursor: pointer" onclick="history.back()">뒤로가기</span>
       </div>
-      <ul class="list-group group-border">
-        <h4>기본정보</h4>
+      <ul class="list-group group-border" style="margin-bottom:20px;">
+        <h5 class="font" style="padding:5px;">기본정보</h4>
         <form method="post">
           {% csrf_token %}
           <li class="list-group-item d-flex">
-            <div class="row justify-content-start col-sm-4 align-self-center">
+            <div class="font row justify-content-start col-sm-4 align-self-center">
               현재 ID
             </div>
-            <div class="row justify-content-end col-sm-6 align-self-center">
+            <div class="font row justify-content-end col-sm-6 align-self-center">
               {{user.username}}
             </div>
           </li>
           <li class="list-group-item d-flex">
-            <div class="row justify-content-start col-sm-4 align-self-center">
+            <div class="font row justify-content-start col-sm-4 align-self-center">
               이메일 주소
             </div>
-            <div class="row justify-content-end col-sm-6 align-self-center">
+            <div class="font row justify-content-end col-sm-6 align-self-center">
               {{form.email}}
             </div>
           </li>
           <li class="list-group-item d-flex">
-            <div class="row justify-content-start col-sm-4 align-self-center">
+            <div class="font row justify-content-start col-sm-4 align-self-center">
               생일
             </div>
-            <div class="row justify-content-end col-sm-6 align-self-center">
+            <div class="font row justify-content-end col-sm-6 align-self-center">
               {{form.birthday}}
             </div>
           </li>
-          <li class="list-group-item d-flex">
+          <li class="font list-group-item d-flex">
             <div class="row justify-content-start col-sm-4 align-self-center">
               성별
             </div>
-            <div class="row justify-content-end col-sm-6 align-self-center">
+            <div class="font row justify-content-end col-sm-6 align-self-center">
               {{form.gender}}
             </div>
           </li>
-          <button type="submit" class="btn btn-primary">변경하기</button>
+          <button type="submit" class="font btn">변경하기</button>
         </form>
       </ul>
     </div>

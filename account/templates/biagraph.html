@@ -7,18 +7,19 @@
     <title>체성분 기록</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" /> 부트스트랩4 온라인 링크 오류날 시 사용{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/basic.css' %}">
+    <link
+      href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"
+      rel="stylesheet"
+    />
     <link
       href="https://i.postimg.cc/xdmYFx3Q/1.png"
       rel="shortcut icon"
       type="image/x-icon"
     />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #333;
-            padding: 30px;
-        }
+     
 
         .container {
             max-width: 1000px;
@@ -71,6 +72,17 @@
     </style>
 </head>
 <body>
+  <nav class="navigator" style="min-width:400px">
+    <a class="logo" href="http://127.0.0.1:8000/account/">
+      <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
+    </a>
+  <ul style="float:right;">
+    <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/image/upload/">체성분 분석</a></li>
+    <li class="list_left"><a class="nav_a font">운동 및 식단</a></li>
+    <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/userInformation">마이페이지</a></li>
+    <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/logout">로그아웃</a></li>
+  </ul>
+</nav>
   <h1 class="text-center bottom-border">체성분 기록</h1>
 <div class="container">
     <div>

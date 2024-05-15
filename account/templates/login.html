@@ -1,3 +1,5 @@
+{%load static%}
+
 <html>
   <head>
     <meta charset="utf-8" />
@@ -5,28 +7,46 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    {% comment %} 부트스트랩4 {% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% comment %} 부트스트랩 아이콘 {% endcomment %}
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    /> 
+    {% comment %} 글꼴 {% endcomment %}
+  {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" /> 부트스트랩4 온라인 링크 오류날 시 사용{% endcomment %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap-icons.css'%}" />
+    <link
+      href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css"
+      rel="stylesheet"
     />
+    
     <title>로그인 페이지</title>
     <link
       href="https://i.postimg.cc/xdmYFx3Q/1.png"
       rel="shortcut icon"
       type="image/x-icon"
     />
+    <style>
+      .font{
+        font-family: 'NanumSquare', sans-serif;
+      }
+    </style>
   </head>
-  <body>
+  <body style="background-color: #F6F6F8">
     <div style="margin-top: 40px"></div>
     <div>
       <img
-        src="https://i.postimg.cc/GmXqqg15/image.png"
-        style="display: block; margin: 0px auto"
+        src="https://i.postimg.cc/jScT3kq0/1.png"
+        style="display: block;
+               margin: 0px auto;
+               background-color:#F5F6F7;
+               "
       />
       {% comment %} https://i.postimg.cc/9FLcKwgK/image.png {% endcomment %}
     </div>
-    <div class="container mt-5" style="max-width: 700px">
+    <div class="container mt-5" style="max-width: 880px">
       <div class="row justify-content-center">
         <div class="col-6">
           <form method="post" action="{% url 'account:login' %}">
@@ -34,42 +54,45 @@
             <div class="alert alert-{{ message.tags }}">{{ message }}</div>
             {% endfor %}
             <div
+              class="font"
               style="
                 text-align: center;
                 margin-bottom: 16px;
-                font-size: large;
+                font-size: 22px;
                 font-weight: bold;
               "
             >
               NAB계정으로 로그인
             </div>
-            <div class="form-group">
+            <div class="form-group" style="height:48px;">
               <input
                 type="text"
-                class="form-control"
+                class="form-control font"
                 name="username"
                 id="username"
-                placeholder="아이디를 입력하세요"
+                placeholder="아이디"
+                style="height:100%"
               />
             </div>
 
-            <div class="form-group">
+            <div class="form-group" style="height:48px">
               <input
                 type="password"
                 name="password"
-                class="form-control"
+                class="form-control font"
                 id="password"
-                placeholder="비밀번호를 입력하세요"
+                placeholder="비밀번호"
+                style="height:100%"
               />
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%">
-              로그인
+            <button type="submit" class="btn btn-primary" style="width: 100%; height:50px; margin-bottom:8px; background-color:#2F6F48; border-color:#2F6F48;">
+              <h5 class="font"style="margin-top:3px;">로그인</h5>
             </button>
             <span style="color: red"><strong>{{ error }}</strong> </span>
           </form>
           <div style="margin-top: 5px"></div>
-          <div class="row justify-content-center">
-            <a style="font-size: 0.9rem" href="{% url 'account:signup' %}"
+          <div class="row justify-content-center font">
+            <a href="{% url 'account:signup' %}"
               >회원가입</a
             >
             <a
@@ -81,7 +104,7 @@
                 background-color: black;
               "
             ></a>
-            <a style="font-size: 0.9rem">아이디 찾기</a>
+            <a >아이디 찾기</a>
             <a
               style="
                 display: inline-block;
@@ -91,17 +114,17 @@
                 background-color: black;
               "
             ></a>
-            <a style="font-size: 0.9rem">비밀번호 찾기</a>
+            <a>비밀번호 찾기</a>
           </div>
         </div>
       </div>
     </div>
     <p
+      class="font"
       style="
-        font-size: 0.9rem;
         text-align: center;
         color: gray;
-        margin-top: 10px;
+        margin-top: 20px;
       "
     >
       회원으로 이용하시는 경우 개인 정보가 저장되어 빠른 분석이 가능합니다

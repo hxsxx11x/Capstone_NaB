@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.shortcuts import redirect
 
-from main.models import UserBia, WorkoutData, DietData
+from main.models import UserBia, WorkoutData, DietData,AccountCustomuser
 
 
 import pandas as pd
@@ -116,10 +116,19 @@ def make_model():
 def status_predict(request):
     current_username = request.user.username
     bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
+    account = AccountCustomuser.objects.get(username=current_username)
+
+    gender = None
+
+    if account.gender == 'man':
+        gender = 0
+    else:
+        gender = 1
+    
     if bia:
         new_data = np.array([[
-            0,
-            25,
+            gender,
+            bia.age,
             bia.height,
             bia.weight,
             bia.skeletal,

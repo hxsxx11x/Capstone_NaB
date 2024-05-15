@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from main.models import UserBia, WorkoutData
-from .models import CustomUser, CustomUserManager
+from .models import CustomUser, CustomUserManager, SelectedWorkout
 from .forms import UserForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 
@@ -40,13 +40,16 @@ def logout_view(request):
 def profile_view(request):
     # 세션에서 현재 사용자 정보 가져오기
     username = request.user.username
+    user_bia = UserBia.objects.filter(username=username).order_by('-bia_num').first()
 
     if not username:
         return redirect('/')  # 로그인 상태가 아니라면 로그인 페이지로 리다이렉트
-
     # 사용자 정보를 가져오기
     account = CustomUser.objects.get(username=username)
-    context = {'username': account.username}
+    
+    context = {'username': account.username,
+               'status': user_bia.status if user_bia else '상태 정보가 없습니다. 체성분 검사를 실행해주세요!'}
+    
     return render(request, 'profile.html', context)
 
 def delete_view(request):
@@ -152,6 +155,7 @@ def result_view(request):
     if user_bia:
         significants = user_bia.significants
         workouts = select_workouts(significants)
+        
     else:
         workouts = {}
 
@@ -162,3 +166,9 @@ def result_view(request):
     }
 
     return render(request, 'result.html', context)
+
+def save_selected_workouts(user, selected_workouts):
+    for day, workouts in selected_workouts.items():
+        for workout, significant in workouts.items():
+            selected_workout = SelectedWorkout(user=user, workout_name=workout, significant_body_part=significant)
+            selected_workout.save()
