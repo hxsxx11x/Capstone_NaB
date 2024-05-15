@@ -139,7 +139,7 @@ def status_predict(request):
         #번호는 의미없는 값이기에 제거
 
         current_dir = os.path.dirname(__file__)
-        model_path = os.path.join(current_dir, 'bia_model.keras')
+        model_path = os.path.join(current_dir, 'model_best.h5')
 
         new_data = new_data.astype(np.float32)
         scaler = StandardScaler()
