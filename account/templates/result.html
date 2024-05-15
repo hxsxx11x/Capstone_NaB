@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" /> 부트스트랩4 온라인 링크 오류날 시 사용{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/basic.css'%}" />
+    
+    <link
+      href="https://i.postimg.cc/xdmYFx3Q/1.png"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
 
     <title>상태 표시</title>
     <style>
@@ -163,27 +169,33 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <td>{{ day }}</td>
-                        <td>
-                            {% if day == "일" %}
-                                일요일은 쉬는 날!
-                            {% else %}
-                                {% for exercise in exercises %}
-                                    <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        </td>
+                        <th>요일</th>
+                        <th>운동 목록</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    {% for day, exercises in day_workouts.items %}
+                        <tr>
+                            <td>{{ day }}</td>
+                            <td>
+                                {% if day == "일" %}
+                                    일요일은 쉬는 날!
+                                {% else %}
+                                    {% for exercise in exercises %}
+                                        <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                {% endif %}    
+                            </td>
+                        {% endfor %}
+                </tbody>
+            </table>
+        </div>
     <p style="font-size: 1.2rem" class="text-center mt-4">
         허리 부상이 있으시다고 체크해주셨기 때문에,<br>
         허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
     </p>
-    <div class="text-center mt-4">
-        <a href="{% url 'account:profile' %}" class="btn btn-primary">메인 화면으로 돌아갈까요?</a>
+    <div class="row justify-content-center mt-4" style="margin-bottom:30px;">
+        <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
     </div>
 </body>
 </html>
