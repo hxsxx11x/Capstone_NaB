@@ -30,6 +30,8 @@ class CustomUser(AbstractUser):
     class Meta:
         verbose_name = '사용자'
         verbose_name_plural = '사용자'
+        
+#정현욱 분석결과 db에 저장
 
 class SelectedWorkout(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

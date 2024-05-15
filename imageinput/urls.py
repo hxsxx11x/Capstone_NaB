@@ -5,4 +5,5 @@ app_name = 'image'
 
 urlpatterns = [
     path('upload/', fileupload, name='upload'),
+    path('confirm/', confirm, name='confirm'),
 ]

@@ -4,10 +4,13 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from main.models import UserBia, WorkoutData
 from .models import CustomUser, CustomUserManager, SelectedWorkout
 from .forms import UserForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
+from .models import SelectedWorkout
+
 
 
 def signup_view(request):
@@ -46,10 +49,13 @@ def profile_view(request):
         return redirect('/')  # 로그인 상태가 아니라면 로그인 페이지로 리다이렉트
     # 사용자 정보를 가져오기
     account = CustomUser.objects.get(username=username)
-    
-    context = {'username': account.username,
-               'status': user_bia.status if user_bia else '상태 정보가 없습니다. 체성분 검사를 실행해주세요!'}
-    
+
+    if request.method == 'POST':
+        if 'make_model' in request.POST:
+            return redirect(reverse('biaengine:makemodel'))
+
+    context = {'username': account.username}
+
     return render(request, 'profile.html', context)
 
 def delete_view(request):
@@ -139,11 +145,14 @@ def select_workouts(significants):
 
     # 운동 프로그램 구성
     for day in ['월', '목']:
-        day_workouts[day].extend(list(chest_workouts) + list(biceps_workouts))
+        day_workouts[day].extend(chest_workouts.values_list('name', flat=True))
+        day_workouts[day].extend(biceps_workouts.values_list('name', flat=True))
     for day in ['화', '금']:
-        day_workouts[day].extend(list(back_workouts) + list(triceps_workouts))
+        day_workouts[day].extend(back_workouts.values_list('name', flat=True))
+        day_workouts[day].extend(triceps_workouts.values_list('name', flat=True))
     for day in ['수', '토']:
-        day_workouts[day].extend(list(shoulder_workouts) + list(leg_workouts))
+        day_workouts[day].extend(shoulder_workouts.values_list('name', flat=True))
+        day_workouts[day].extend(leg_workouts.values_list('name', flat=True))
     for day in ['일']:
         day_workouts[day].extend(['일요일은 쉬는 날!'])
     return day_workouts
@@ -154,18 +163,36 @@ def result_view(request):
 
     if user_bia:
         significants = user_bia.significants
-        workouts = select_workouts(significants)
-        
+
+        print(significants)
+        day_workouts = select_workouts(significants)
+
     else:
-        workouts = {}
+        day_workouts = {}
+
+    # 운동 데이터에 설명 추가
+    workout_data = {}
+    for day, workout_list in day_workouts.items():
+        workout_data[day] = []
+        for workout_name in workout_list:
+            if workout_name == '일요일은 쉬는 날!':
+                workout_data[day].append({'name': workout_name, 'caption': ''})
+            else:
+                try:
+                    workout_obj = WorkoutData.objects.get(name=workout_name)
+                    workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})
+                except WorkoutData.DoesNotExist:
+                    workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})
 
     context = {
         'user_id': current_username,
         'status': user_bia.status if user_bia else '상태 정보 없음',
-        'day_workouts': workouts,
+        'day_workouts': workout_data,
     }
 
     return render(request, 'result.html', context)
+
+# 정현욱 분석결과 db에 저장
 
 def save_selected_workouts(user, selected_workouts):
     for day, workouts in selected_workouts.items():

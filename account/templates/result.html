@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/basic.css'%}" />
 
     <title>상태 표시</title>
-        <style>
+    <style>
         .status-title {
             font-size: 2rem;
             text-align: center;
@@ -28,6 +28,16 @@
             text-align: center;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.exercise-link').forEach(function(element) {
+                element.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alert(this.dataset.caption);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <nav class="navigator" style="min-width:400px">
@@ -153,36 +163,27 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>요일</th>
-                        <th>운동 목록</th>
+                        <td>{{ day }}</td>
+                        <td>
+                            {% if day == "일" %}
+                                일요일은 쉬는 날!
+                            {% else %}
+                                {% for exercise in exercises %}
+                                    <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for day, exercises in day_workouts.items %}
-                        <tr>
-                            <td>{{ day }}</td>
-                            <td>
-                                {% if day == "일" %}
-                                    일요일은 쉬는 날!
-                                {% else %}
-                                    {% for exercise in exercises %}
-                                        {{ exercise.name }}{% if not forloop.last %}, {% endif %}
-                                    {% endfor %}
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-            <p style="font-size: 1.2rem" class="text-center mt-4">
-                허리 부상이 있으시다고 체크해주셨기 때문에,<br>
-                허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
-            </p>
-        <div class="text-center mt-4" style="background-color: white; padding-bottom:30px;">
-            <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
-        </div>
-        
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <p style="font-size: 1.2rem" class="text-center mt-4">
+        허리 부상이 있으시다고 체크해주셨기 때문에,<br>
+        허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
+    </p>
+    <div class="text-center mt-4">
+        <a href="{% url 'account:profile' %}" class="btn btn-primary">메인 화면으로 돌아갈까요?</a>
     </div>
 </body>
 </html>
