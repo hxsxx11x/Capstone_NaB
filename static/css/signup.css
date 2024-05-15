@@ -1,11 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
+body{
+  background-color: #F6F6F8;
+} 
+label {
+  display: block;
+  margin-bottom: 5px;
 }
-
-header {
-  background-color: #5f0080;
-  color: #fff;
-  padding: 10px 0;
+p {
+  font-size:17px;
+  margin:0px;
 }
 
 .header-container {
@@ -37,12 +39,6 @@ header {
   margin-bottom: 20px;
 }
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
 input[type="email"],
 input[type="text"],
 input[type="password"],
@@ -57,13 +53,19 @@ select {
 button {
   width: 100%;
   padding: 10px;
-  background-color: #1a93ff;
+  height:20px;
+  background-color: #2F6F48;
   color: #fff;
+  font-size: 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 button:hover {
-  background-color: #1a93ff;
+  background-color: #2F6F48;
+}
+
+.font{
+  font-family: 'NanumSquare', sans-serif;
 }

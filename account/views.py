@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from main.models import UserBia, WorkoutData
-from .models import CustomUser, CustomUserManager
+from .models import CustomUser, CustomUserManager, SelectedWorkout
 from .forms import UserForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import SelectedWorkout
@@ -43,10 +43,10 @@ def logout_view(request):
 def profile_view(request):
     # 세션에서 현재 사용자 정보 가져오기
     username = request.user.username
+    user_bia = UserBia.objects.filter(username=username).order_by('-bia_num').first()
 
     if not username:
         return redirect('/')  # 로그인 상태가 아니라면 로그인 페이지로 리다이렉트
-
     # 사용자 정보를 가져오기
     account = CustomUser.objects.get(username=username)
 
@@ -55,6 +55,7 @@ def profile_view(request):
             return redirect(reverse('biaengine:makemodel'))
 
     context = {'username': account.username}
+
     return render(request, 'profile.html', context)
 
 def delete_view(request):
@@ -162,8 +163,10 @@ def result_view(request):
 
     if user_bia:
         significants = user_bia.significants
+
         print(significants)
         day_workouts = select_workouts(significants)
+
     else:
         day_workouts = {}
 
@@ -190,6 +193,7 @@ def result_view(request):
     return render(request, 'result.html', context)
 
 # 정현욱 분석결과 db에 저장
+
 def save_selected_workouts(user, selected_workouts):
     for day, workouts in selected_workouts.items():
         for workout, significant in workouts.items():

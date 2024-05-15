@@ -44,14 +44,24 @@ def fileupload(request):
         percent_fat = re.findall(r'Percent Body Fat\s*(\d{2}\.\d{1})', results_string)
         bmr = re.findall(r'기초대사량\s*(\d{4})', results_string)
 
+        
+        print("height:", height[-1])
+        print("weight:", weight[-1])
+        print("skeletal:",skeletal[0])
+        print("fat:",fat[-1])
+        print("BMI:",BMI[-1])
+        print("percent_fat:",percent_fat[-1])
+        print("bmr:",bmr[0])
 
-        print(height[-1])
-        print(weight[-1])
-        print(skeletal[0])
-        print(fat[-1])
-        print(BMI[-1])
-        print(percent_fat[-1])
-        print(bmr[0])
+        #ocr로 읽은 정보 프론트로 보냄
+        context = {'height':height,
+                   'weight':weight,
+                   'skeletal':skeletal,
+                   'fat':fat,
+                   'BMI':BMI,
+                   'percent_fat':percent_fat,
+                   'bmr':bmr,
+                   }
 
 
         if 'confirm' in request.POST:  # 사용자가 값을 확인하고 폼을 제출한 경우
@@ -103,6 +113,7 @@ def fileupload(request):
                 'bmr': bmr[0] if bmr else 0
             }
             return render(request, 'confirm_values.html', context)
+
 
         '''
         image_width = image.shape[1]

@@ -1,0 +1,16 @@
+.home_img_wrapper{
+    position: relative;
+    text-align: center;
+}
+
+.home_img_text{
+    position: absolute;
+    bottom: 5%;
+    right: 3%;
+    
+}
+
+.home_img_text svg{
+    width:20px; 
+    height:20px;
+}

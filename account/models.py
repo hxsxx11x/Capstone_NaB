@@ -23,7 +23,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractUser):
     # 추가적인 사용자 필드들을 정의할 수 있습니다
     birthday = models.DateField(null=True, blank=True)
-    gender = models.CharField(max_length=10, choices=[('man', '남성'), ('woman', '여성'), ('unsigned', '미정')], null=True,
+    gender = models.CharField(max_length=10, choices=[('man', '남성'), ('woman', '여성')], null=True,
                               blank=True)
     objects = CustomUserManager()
 
