@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>상태 표시</title>
-        <style>
+    <style>
         .status-title {
             font-size: 2rem;
             text-align: center;
@@ -24,6 +24,16 @@
             text-align: center;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.exercise-link').forEach(function(element) {
+                element.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alert(this.dataset.caption);
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="status-title">{{ user_id }}님의 현재 상태는</div>
@@ -89,7 +99,7 @@
                                 일요일은 쉬는 날!
                             {% else %}
                                 {% for exercise in exercises %}
-                                    {{ exercise.name }}{% if not forloop.last %}, {% endif %}
+                                    <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             {% endif %}
                         </td>
@@ -98,10 +108,10 @@
             </tbody>
         </table>
     </div>
-        <p style="font-size: 1.2rem" class="text-center mt-4">
-            허리 부상이 있으시다고 체크해주셨기 때문에,<br>
-            허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
-        </p>
+    <p style="font-size: 1.2rem" class="text-center mt-4">
+        허리 부상이 있으시다고 체크해주셨기 때문에,<br>
+        허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
+    </p>
     <div class="text-center mt-4">
         <a href="{% url 'account:profile' %}" class="btn btn-primary">메인 화면으로 돌아갈까요?</a>
     </div>

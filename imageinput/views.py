@@ -54,40 +54,55 @@ def fileupload(request):
         print(bmr[0])
 
 
+        if 'confirm' in request.POST:  # 사용자가 값을 확인하고 폼을 제출한 경우
+            height = float(request.POST.get('height', 0))
+            weight = float(request.POST.get('weight', 0))
+            skeletal = float(request.POST.get('skeletal', 0))
+            fat = float(request.POST.get('fat', 0))
+            BMI = float(request.POST.get('bmi', 0))
+            percent_fat = float(request.POST.get('percent_fat', 0))
+            bmr = float(request.POST.get('bmr', 0))
 
-        user_bia = UserBia(
-            date = datetime.now(),
-            username = request.user.username,
-            age = 25, #calculate_age(request.user.birthday)
-            height=float(height[-1]) if height else 0,
-            weight=float(weight[-1]) if weight else 0,
-            skeletal=float(skeletal[0]) if skeletal else 0,
-            fat=float(fat[-1]) if fat else 0,
-            fat_per = float(percent_fat[-1]) if percent_fat else 0,
-            bmi=float(BMI[-1]) if BMI else 0,
-            status = (0),
-            bmr = float(bmr[0]) if bmr else 0)
-        user_bia.save()
+            request.session['bia_data'] = {
+                'height': height,
+                'weight': weight,
+                'skeletal': skeletal,
+                'fat': fat,
+                'percent_fat': percent_fat,
+                'bmi': BMI,
+                'bmr': bmr
+            }
 
-        '''
-            bia_num = models.AutoField(primary_key=True)
-            date = models.DateField()
-            username = models.CharField(max_length=100)
-            age = models.IntegerField()
-            height = models.FloatField()
-            weight = models.FloatField()
-            skeletal = models.FloatField()
-            fat = models.FloatField()
-            fat_per = models.FloatField()
-            bmi = models.FloatField()
-            status = models.CharField(max_length=100)
-            bmr = models.FloatField()
-        '''
+            '''
+                bia_num = models.AutoField(primary_key=True)
+                date = models.DateField()
+                username = models.CharField(max_length=100)
+                age = models.IntegerField()
+                height = models.FloatField()
+                weight = models.FloatField()
+                skeletal = models.FloatField()
+                fat = models.FloatField()
+                fat_per = models.FloatField()
+                bmi = models.FloatField()
+                status = models.CharField(max_length=100)
+                bmr = models.FloatField()
+            '''
 
 
-        #return redirect('biaengine:status')
-        return redirect('significants:significants')
+            #return redirect('biaengine:status')
+            return redirect('significants:significants')
 
+        else:
+            context = {
+                'height': height[-1] if height else 0,
+                'weight': weight[-1] if weight else 0,
+                'skeletal': skeletal[0] if skeletal else 0,
+                'fat': fat[-1] if fat else 0,
+                'bmi': BMI[-1] if BMI else 0,
+                'percent_fat': percent_fat[-1] if percent_fat else 0,
+                'bmr': bmr[0] if bmr else 0
+            }
+            return render(request, 'confirm_values.html', context)
 
         '''
         image_width = image.shape[1]
@@ -99,6 +114,30 @@ def fileupload(request):
         '''
     else:
         return render(request, 'image_upload.html')
+
+def confirm(request):
+    if request.method == 'POST':
+        height = float(request.POST.get('height', 0))
+        weight = float(request.POST.get('weight', 0))
+        skeletal = float(request.POST.get('skeletal', 0))
+        fat = float(request.POST.get('fat', 0))
+        BMI = float(request.POST.get('bmi', 0))
+        percent_fat = float(request.POST.get('percent_fat', 0))
+        bmr = float(request.POST.get('bmr', 0))
+
+        request.session['bia_data'] = {
+            'height': height,
+            'weight': weight,
+            'skeletal': skeletal,
+            'fat': fat,
+            'percent_fat': percent_fat,
+            'bmi': BMI,
+            'bmr': bmr
+        }
+
+        return redirect('significants:significants')
+    else:
+        return redirect('image:upload')
 
 def calculate_age(birthday):
     today = datetime.now().date()

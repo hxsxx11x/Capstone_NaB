@@ -22,7 +22,7 @@ from sklearn.preprocessing import StandardScaler
 
 
 # 학습 모델 생성
-def make_model():
+def make_model(request):
     # hyperparameters
     training_epochs = 100 # EarlyStopping이 적용되므로 큰값으로 설정
     batch_size = 100     # 임의의 값
@@ -79,7 +79,7 @@ def make_model():
     #Adam과 CategoricalCrossentropy사용
     bia_model.compile(
         optimizer=keras.optimizers.Adam(learning_rate),
-        loss=keras.losses.CategoricalCrossentropy(),
+        loss=keras.losses.CategoricalCrossentropy(from_logits=False),
         metrics=['accuracy']
     )
 
@@ -92,7 +92,7 @@ def make_model():
 
 
     estopping = EarlyStopping(monitor='val_accuracy', patience=patience) #overfitting 방지
-    mcheckpoint = ModelCheckpoint('model_best.h5', monitor='val_accuracy', save_best_only=True)
+    mcheckpoint = ModelCheckpoint('model_best.keras', monitor='val_accuracy', save_best_only=True)
 
     #6:2:2로 train:vaildation:test 나눈 후 학습
     history = bia_model.fit(data_bia_train_val, label_bia_train_val, batch_size=batch_size, validation_split=0.25, epochs=training_epochs, callbacks=[estopping, mcheckpoint])
@@ -130,7 +130,7 @@ def status_predict(request):
         #번호는 의미없는 값이기에 제거
 
         current_dir = os.path.dirname(__file__)
-        model_path = os.path.join(current_dir, 'bia_model.h5')
+        model_path = os.path.join(current_dir, 'bia_model.keras')
 
         new_data = new_data.astype(np.float32)
         scaler = StandardScaler()
@@ -167,3 +167,6 @@ def status_predict(request):
         request.session['status'] = status
 
     return redirect('account:result')
+
+if __name__ == '__main__':
+    make_model()

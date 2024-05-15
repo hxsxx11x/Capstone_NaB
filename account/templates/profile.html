@@ -102,7 +102,12 @@
             <p class="row" style="margin-left:10px; font-size:16px" >점심:</p>
             <p class="row" style="margin-left:10px; font-size:16px">저녁:</p>
             -->
-            <p class="row" style="margin-left:113px; font-size:16px">업데이트 예정</p>
+            <p class="row" style="margin-left:113px; font-size:16px">업데이트 예정
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" name="make_model">Make Model</button>
+            </form>
+            </p>
             <a class = "row justify-content-center" href="{% url 'account:dietmenu'%}"> 자세히 보기</a>
         </div>
       </div>
