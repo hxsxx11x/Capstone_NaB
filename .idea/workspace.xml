@@ -4,22 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="1차 데모">
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15__10_05__________.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15_오후_10_05,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/bia_model.keras" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15_오후_10_05,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biaengine/bia_model.h5" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biaengine/bia_model.keras" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/biaengine/model_best.keras" afterDir="false" />
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="OCR 결과 확인 및 운동 설명 확인 기능 추가">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-05-15__10_05__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15__10_05__________.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/result.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biaengine/model_best.h5" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biaengine/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/biaengine/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" beforeDir="false" afterPath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/significants/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/significants/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,42 +74,44 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2aqqIwUGZW5iNpHwYlRa6btMMnV" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Django 서버.NaB.executor": "Run",
-    "JavaScript 디버그.check_significants.html.executor": "Run",
-    "Python.views.executor": "Run",
-    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "django.template.preview.state": "SHOW_EDITOR",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/tukorea/capstone/NaB/biaengine",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "python.debugger.dataview.autoresize": "false",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Django 서버.NaB.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript 디버그.check_significants.html.executor&quot;: &quot;Run&quot;,
+    &quot;Python.views.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;django.template.preview.state&quot;: &quot;SHOW_EDITOR&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/tukorea/capstone/NaB/biaengine&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;python.debugger.dataview.autoresize&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "ChangesTree.GroupingKeys": [
+  &quot;keyToStringList&quot;: {
+    &quot;ChangesTree.GroupingKeys&quot;: [
     ],
-    "DatabaseDriversLRU": [
-      "mysql"
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\tukorea\capstone\NaB\biaengine" />
@@ -142,7 +135,6 @@
     </configuration>
     <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NaB" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -165,7 +157,6 @@
     </configuration>
     <configuration name="NaB" type="Python.DjangoServer" factoryName="Django server">
       <module name="NaB" />
-      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -463,7 +454,8 @@
     <MESSAGE value="OCR 기능 리다이렉트 구현" />
     <MESSAGE value="메인화면에서 로그인 기능 사용 가능하도록 변경" />
     <MESSAGE value="1차 데모" />
-    <option name="LAST_COMMIT_MESSAGE" value="1차 데모" />
+    <MESSAGE value="OCR 결과 확인 및 운동 설명 확인 기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="OCR 결과 확인 및 운동 설명 확인 기능 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -491,8 +483,10 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NaB$views.coverage" NAME="views 커버리지 결과" MODIFIED="1710870013276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/biaengine" />
-    <SUITE FILE_PATH="coverage/NaB$urls.coverage" NAME="urls 커버리지 결과" MODIFIED="1706179325127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/imageinput" />
+    <SUITE FILE_PATH="coverage/NaB$tests.coverage" NAME="tests 커버리지 결과" MODIFIED="1715748713880" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/biaengine" />
+    <SUITE FILE_PATH="coverage/NaB$model.coverage" NAME="model 커버리지 결과" MODIFIED="1715752370389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NaB$views.coverage" NAME="views 커버리지 결과" MODIFIED="1715749197910" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/imageinput" />
     <SUITE FILE_PATH="coverage/NaB$qrtest.coverage" NAME="qrtest 커버리지 결과" MODIFIED="1707970643725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NaB" />
+    <SUITE FILE_PATH="coverage/NaB$urls.coverage" NAME="urls 커버리지 결과" MODIFIED="1706179325127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/imageinput" />
   </component>
 </project>

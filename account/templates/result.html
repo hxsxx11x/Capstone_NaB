@@ -207,12 +207,15 @@
                 </tbody>
             </table>
         </div>
-    <p style="font-size: 1.2rem" class="text-center mt-4">
-        허리 부상이 있으시다고 체크해주셨기 때문에,<br>
-        허리에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
-    </p>
-    <div class="row justify-content-center mt-4" style="margin-bottom:30px;">
-        <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
+        {% if is_issue %}
+        <p style="font-size: 1.2rem" class="text-center mt-4">
+            부상이 있으시다고 체크해주셨기 때문에,<br>
+            부상 부위에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
+        </p>
+        {% endif %}
+        <div class="row justify-content-center mt-4" style="margin-bottom:30px;">
+            <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
+        </div>
     </div>
-</body>
+    </body>
 </html>

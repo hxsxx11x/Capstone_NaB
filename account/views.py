@@ -126,22 +126,73 @@ def select_workouts(significants):
     }
 
     # 가슴 및 이두 운동 선택
-    chest_workouts = WorkoutData.objects.filter(part='가슴', target__contains='대흉근').exclude(
-        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:3]
-    biceps_workouts = WorkoutData.objects.filter(part='팔', target__contains='이두근').exclude(
-        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:1]
+    chest_workouts = WorkoutData.objects.filter(part='가슴', target__contains='대흉근')
+    if 'waist' in significants:
+        chest_workouts = chest_workouts.exclude(etc__contains='허리')
+    if 'shoulder' in significants:
+        chest_workouts = chest_workouts.exclude(etc__contains='어깨')
+    if 'elbow' in significants:
+        chest_workouts = chest_workouts.exclude(etc__contains='팔꿈치')
+    if 'knee' in significants:
+        chest_workouts = chest_workouts.exclude(etc__contains='무릎')
+    chest_workouts = chest_workouts.order_by('?')[:3]
+
+    biceps_workouts = WorkoutData.objects.filter(part='팔', target__contains='이두근')
+    if 'waist' in significants:
+        biceps_workouts = biceps_workouts.exclude(etc__contains='허리')
+    if 'shoulder' in significants:
+        biceps_workouts = biceps_workouts.exclude(etc__contains='어깨')
+    if 'elbow' in significants:
+        biceps_workouts = biceps_workouts.exclude(etc__contains='팔꿈치')
+    if 'knee' in significants:
+        biceps_workouts = biceps_workouts.exclude(etc__contains='무릎')
+    biceps_workouts = biceps_workouts.order_by('?')[:1]
 
     # 등 및 삼두 운동 선택
-    back_workouts = WorkoutData.objects.filter(part='등', target__contains='광배근').exclude(
-        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:3]
-    triceps_workouts = WorkoutData.objects.filter(part='팔', target__contains='삼두근').exclude(
-        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:1]
+    back_workouts = WorkoutData.objects.filter(part='등', target__contains='광배근')
+    if 'waist' in significants:
+        back_workouts = back_workouts.exclude(etc__contains='허리')
+    if 'shoulder' in significants:
+        back_workouts = back_workouts.exclude(etc__contains='어깨')
+    if 'elbow' in significants:
+        back_workouts = back_workouts.exclude(etc__contains='팔꿈치')
+    if 'knee' in significants:
+        back_workouts = back_workouts.exclude(etc__contains='무릎')
+    back_workouts = back_workouts.order_by('?')[:3]
+
+    triceps_workouts = WorkoutData.objects.filter(part='팔', target__contains='삼두근')
+    if 'waist' in significants:
+        triceps_workouts = triceps_workouts.exclude(etc__contains='허리')
+    if 'shoulder' in significants:
+        triceps_workouts = triceps_workouts.exclude(etc__contains='어깨')
+    if 'elbow' in significants:
+        triceps_workouts = triceps_workouts.exclude(etc__contains='팔꿈치')
+    if 'knee' in significants:
+        triceps_workouts = triceps_workouts.exclude(etc__contains='무릎')
+    triceps_workouts = triceps_workouts.order_by('?')[:1]
 
     # 어깨 및 하체 운동 선택
-    shoulder_workouts = WorkoutData.objects.filter(part='어깨', target__contains='전면삼각근').exclude(
-        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:2]
-    leg_workouts = WorkoutData.objects.filter(part='하체', target__contains='대퇴사두근').exclude(
-        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:2]
+    shoulder_workouts = WorkoutData.objects.filter(part='어깨', target__contains='전면삼각근')
+    if 'waist' in significants:
+        shoulder_workouts = shoulder_workouts.exclude(etc__contains='허리')
+    if 'shoulder' in significants:
+        shoulder_workouts = shoulder_workouts.exclude(etc__contains='어깨')
+    if 'elbow' in significants:
+        shoulder_workouts = shoulder_workouts.exclude(etc__contains='팔꿈치')
+    if 'knee' in significants:
+        shoulder_workouts = shoulder_workouts.exclude(etc__contains='무릎')
+    shoulder_workouts = shoulder_workouts.order_by('?')[:2]
+
+    leg_workouts = WorkoutData.objects.filter(part='하체', target__contains='대퇴사두근')
+    if 'waist' in significants:
+        leg_workouts = leg_workouts.exclude(etc__contains='허리')
+    if 'shoulder' in significants:
+        leg_workouts = leg_workouts.exclude(etc__contains='어깨')
+    if 'elbow' in significants:
+        leg_workouts = leg_workouts.exclude(etc__contains='팔꿈치')
+    if 'knee' in significants:
+        leg_workouts = leg_workouts.exclude(etc__contains='무릎')
+    leg_workouts = leg_workouts.order_by('?')[:2]
 
     # 운동 프로그램 구성
     for day in ['월', '목']:
@@ -155,6 +206,7 @@ def select_workouts(significants):
         day_workouts[day].extend(leg_workouts.values_list('name', flat=True))
     for day in ['일']:
         day_workouts[day].extend(['일요일은 쉬는 날!'])
+    print(day_workouts)
     return day_workouts
 
 def result_view(request):
@@ -164,6 +216,11 @@ def result_view(request):
     if user_bia:
         significants = user_bia.significants
         print(significants)
+        waist_issue = 'waist' in significants
+        elbow_issue = 'elbow' in significants
+        knee_issue = 'knee' in significants
+        shoulder_issue = 'shouder' in significants
+        is_issue = waist_issue or elbow_issue or knee_issue or shoulder_issue
         day_workouts = select_workouts(significants)
     else:
         day_workouts = {}
@@ -186,6 +243,7 @@ def result_view(request):
         'user_id': current_username,
         'status': user_bia.status if user_bia else '상태 정보 없음',
         'day_workouts': workout_data,
+        'is_issue': is_issue
     }
 
     return render(request, 'result.html', context)
