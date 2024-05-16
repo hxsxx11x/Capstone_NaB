@@ -163,10 +163,8 @@ def result_view(request):
 
     if user_bia:
         significants = user_bia.significants
-
         print(significants)
         day_workouts = select_workouts(significants)
-
     else:
         day_workouts = {}
 

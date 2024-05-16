@@ -14,9 +14,11 @@ def significants(request):
             print("Checked Significants:",checked_significants)  # 디버깅 출력
             current_username = request.user.username
             bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
+
+            '''
             bia.significants = ', '.join(checked_significants)
             bia.save()
-
+            '''
             bia_data = request.session.get('bia_data', {})
             user_bia = UserBia(
                 date=datetime.now(),

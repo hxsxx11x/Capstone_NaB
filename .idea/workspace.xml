@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="1차 데모">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15__10_05__________.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15_오후_10_05,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/bia_model.keras" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15_오후_10_05,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biaengine/bia_model.h5" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biaengine/bia_model.keras" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/biaengine/model_best.keras" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biaengine/model_best.h5" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biaengine/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/biaengine/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" beforeDir="false" afterPath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/significants/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/significants/views.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="hxsxx11x &lt;2280562@gmail.com&gt;" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;hxsxx11x&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="d308b902-c987-4462-bc27-44b2acc1df4c" />
+        <option name="url" value="https://github.com/hxsxx11x/Capstone_NaB.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/NaB/settings.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/NaB/urls.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/account/models.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/account/templates/login.html" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/account/templates/profile.html" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/account/templates/signup.html" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/account/urls.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/account/views.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main/admin.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/main/models.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main/templates/main.html" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main/urls.py" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/main/views.py" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2aqqIwUGZW5iNpHwYlRa6btMMnV" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Django 서버.NaB.executor": "Run",
+    "JavaScript 디버그.check_significants.html.executor": "Run",
+    "Python.views.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "django.template.preview.state": "SHOW_EDITOR",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/tukorea/capstone/NaB/biaengine",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "python.debugger.dataview.autoresize": "false",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "ChangesTree.GroupingKeys": [
+    ],
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\tukorea\capstone\NaB\biaengine" />
+      <recent name="D:\tukorea\capstone\NaB\static\css" />
+      <recent name="D:\tukorea\capstone\NaB\account\templates" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\tukorea\capstone\NaB\biaengine" />
+      <recent name="D:\tukorea\capstone\NaB\biaengine\biamodel" />
+      <recent name="C:\Users\22805\Desktop\tukorea\capstone\NaB\biaengine" />
+      <recent name="C:\Users\22805\Desktop\tukorea\capstone\NaB\imageinput" />
+      <recent name="C:\Users\22805\Desktop\tukorea\capstone\NaB\account\templates" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django 서버.NaB">
+    <configuration name="main.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/NaB/main/templates/main.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="signup.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/NaB/NaB/account/templates/signup.html" useFirstLineBreakpoints="true" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NaB" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/account" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/account/views.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="NaB" type="Python.DjangoServer" factoryName="Django server">
+      <module name="NaB" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="NaB.settings" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\22805\Desktop\tukorea\capstone\NaB\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="localhost" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django 서버.NaB" />
+      <item itemvalue="JavaScript 디버그.main.html" />
+      <item itemvalue="JavaScript 디버그.signup.html" />
+      <item itemvalue="Python.views" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.views" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="" />
+      <created>1705056380609</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1705056380609</updated>
+      <workItem from="1705056417042" duration="203000" />
+      <workItem from="1705277541516" duration="233000" />
+      <workItem from="1705277778975" duration="24000" />
+      <workItem from="1705277806483" duration="170000" />
+      <workItem from="1705277979930" duration="29000" />
+      <workItem from="1705278012636" duration="20000" />
+      <workItem from="1705278036361" duration="53000" />
+      <workItem from="1705278093453" duration="673000" />
+      <workItem from="1705279026404" duration="867000" />
+      <workItem from="1705283718251" duration="319000" />
+      <workItem from="1705284059090" duration="251000" />
+      <workItem from="1705284335186" duration="4213000" />
+      <workItem from="1705315575405" duration="5951000" />
+      <workItem from="1705362707073" duration="616000" />
+      <workItem from="1705399424141" duration="2970000" />
+      <workItem from="1705477475914" duration="29000" />
+      <workItem from="1705477526980" duration="8320000" />
+      <workItem from="1705576082952" duration="202000" />
+      <workItem from="1705576307035" duration="1885000" />
+      <workItem from="1705641547918" duration="4659000" />
+      <workItem from="1705648261160" duration="8853000" />
+      <workItem from="1705811601940" duration="3355000" />
+      <workItem from="1705815468065" duration="3102000" />
+      <workItem from="1705888637299" duration="2071000" />
+      <workItem from="1705917778377" duration="2939000" />
+      <workItem from="1705922582417" duration="1297000" />
+      <workItem from="1705923901053" duration="1124000" />
+      <workItem from="1705925047432" duration="293000" />
+      <workItem from="1705978929659" duration="37000" />
+      <workItem from="1705987238331" duration="9000" />
+      <workItem from="1706005610295" duration="2573000" />
+      <workItem from="1706008207818" duration="1360000" />
+      <workItem from="1706055255375" duration="1104000" />
+      <workItem from="1706056382724" duration="2057000" />
+      <workItem from="1706071363186" duration="11171000" />
+      <workItem from="1706149893295" duration="11117000" />
+      <workItem from="1706227901298" duration="630000" />
+      <workItem from="1706489552662" duration="627000" />
+      <workItem from="1706515580005" duration="1547000" />
+      <workItem from="1706517158425" duration="5394000" />
+      <workItem from="1706526616996" duration="791000" />
+      <workItem from="1706590491738" duration="436000" />
+      <workItem from="1706761630363" duration="1228000" />
+      <workItem from="1706833115860" duration="7523000" />
+      <workItem from="1706852579782" duration="1067000" />
+      <workItem from="1706858711083" duration="3684000" />
+      <workItem from="1707099062205" duration="4175000" />
+      <workItem from="1707107252674" duration="2207000" />
+      <workItem from="1707110263819" duration="598000" />
+      <workItem from="1707123279096" duration="6991000" />
+      <workItem from="1707186111767" duration="14000" />
+      <workItem from="1707197712962" duration="4922000" />
+      <workItem from="1707355480459" duration="3709000" />
+      <workItem from="1707819265053" duration="4060000" />
+      <workItem from="1707964390952" duration="631000" />
+      <workItem from="1707965090290" duration="3600000" />
+      <workItem from="1707979949178" duration="197000" />
+      <workItem from="1707993378565" duration="55000" />
+      <workItem from="1708043628025" duration="623000" />
+      <workItem from="1708329369223" duration="1318000" />
+      <workItem from="1708417391606" duration="701000" />
+      <workItem from="1708567241464" duration="27913000" />
+      <workItem from="1708595431460" duration="975000" />
+      <workItem from="1709111117039" duration="7184000" />
+      <workItem from="1709465498392" duration="362000" />
+      <workItem from="1709474218553" duration="831000" />
+      <workItem from="1709723306243" duration="749000" />
+      <workItem from="1710007916541" duration="3218000" />
+      <workItem from="1710307168631" duration="1000" />
+      <workItem from="1710684179611" duration="1094000" />
+      <workItem from="1710770879457" duration="5487000" />
+      <workItem from="1710860313369" duration="8717000" />
+      <workItem from="1710943803133" duration="8411000" />
+      <workItem from="1710955087484" duration="12872000" />
+      <workItem from="1711383784799" duration="1318000" />
+      <workItem from="1711641517524" duration="2000" />
+      <workItem from="1711641552218" duration="26000" />
+      <workItem from="1713445076954" duration="417000" />
+      <workItem from="1715423399941" duration="892000" />
+      <workItem from="1715773250380" duration="600000" />
+      <workItem from="1715776672809" duration="21591000" />
+    </task>
+    <task id="LOCAL-00001" summary="init commit">
+      <option name="closed" value="true" />
+      <created>1705648051067</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1705648051067</updated>
+    </task>
+    <task id="LOCAL-00002" summary="login 구현">
+      <option name="closed" value="true" />
+      <created>1705660393833</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705660393833</updated>
+    </task>
+    <task id="LOCAL-00003" summary="signup, login, logout 구현">
+      <option name="closed" value="true" />
+      <created>1706084217167</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1706084217167</updated>
+    </task>
+    <task id="LOCAL-00004" summary="회원 탈퇴 구현">
+      <option name="closed" value="true" />
+      <created>1706085064576</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1706085064576</updated>
+    </task>
+    <task id="LOCAL-00005" summary="이미지 모듈 앱 생성">
+      <option name="closed" value="true" />
+      <created>1706151294214</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706151294214</updated>
+    </task>
+    <task id="LOCAL-00006" summary="이미지 업로드 기능 구현">
+      <option name="closed" value="true" />
+      <created>1706181316326</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706181316326</updated>
+    </task>
+    <task id="LOCAL-00007" summary="이미지 업로드 기능 구현">
+      <option name="closed" value="true" />
+      <created>1706590677013</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706590677013</updated>
+    </task>
+    <task id="LOCAL-00008" summary="OCR 기능 삽입">
+      <option name="closed" value="true" />
+      <created>1706590827732</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706590827732</updated>
+    </task>
+    <task id="LOCAL-00009" summary="OCR 기능 리다이렉트 구현">
+      <option name="closed" value="true" />
+      <created>1706840137417</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706840137417</updated>
+    </task>
+    <task id="LOCAL-00010" summary="메인화면에서 로그인 기능 사용 가능하도록 변경">
+      <option name="closed" value="true" />
+      <created>1706861799878</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706861799878</updated>
+    </task>
+    <task id="LOCAL-00011" summary="1차 데모">
+      <option name="closed" value="true" />
+      <created>1710980765330</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1710980765330</updated>
+    </task>
+    <task id="LOCAL-00012" summary="1차 데모">
+      <option name="closed" value="true" />
+      <created>1710980918581</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1710980918581</updated>
+    </task>
+    <task id="LOCAL-00013" summary="1차 데모">
+      <option name="closed" value="true" />
+      <created>1710980950862</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1710980950862</updated>
+    </task>
+    <task id="LOCAL-00014" summary="1차 데모">
+      <option name="closed" value="true" />
+      <created>1710981455246</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1710981455246</updated>
+    </task>
+    <task id="LOCAL-00015" summary="1차 데모">
+      <option name="closed" value="true" />
+      <created>1715778354694</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1715778354694</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="NaB/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="init commit" />
+    <MESSAGE value="login 구현" />
+    <MESSAGE value="signup, login, logout 구현" />
+    <MESSAGE value="회원 탈퇴 구현" />
+    <MESSAGE value="이미지 모듈 앱 생성" />
+    <MESSAGE value="이미지 업로드 기능 구현" />
+    <MESSAGE value="OCR 기능 삽입" />
+    <MESSAGE value="OCR 기능 리다이렉트 구현" />
+    <MESSAGE value="메인화면에서 로그인 기능 사용 가능하도록 변경" />
+    <MESSAGE value="1차 데모" />
+    <option name="LAST_COMMIT_MESSAGE" value="1차 데모" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/imageinput/views.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/account/views.py" line="17">
+        <watch expression="form.is_valid()" />
+      </inline-watch>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/account/views.py" line="17">
+        <watch expression="form.is_valid()" />
+      </inline-watch>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/NaB$views.coverage" NAME="views 커버리지 결과" MODIFIED="1710870013276" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/biaengine" />
+    <SUITE FILE_PATH="coverage/NaB$urls.coverage" NAME="urls 커버리지 결과" MODIFIED="1706179325127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/imageinput" />
+    <SUITE FILE_PATH="coverage/NaB$qrtest.coverage" NAME="qrtest 커버리지 결과" MODIFIED="1707970643725" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/NaB" />
+  </component>
+</project>

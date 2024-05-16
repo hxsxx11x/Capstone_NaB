@@ -1,0 +1,109 @@
+Index: account/models.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.db import models\r\nfrom django.contrib.auth.models import AbstractUser\r\nfrom django.contrib.auth.models import BaseUserManager\r\n\r\n\r\nclass CustomUserManager(BaseUserManager):\r\n    def create_user(self, email, password=None, **extra_fields):\r\n        if not email:\r\n            raise ValueError('The Email field must be set')\r\n        email = self.normalize_email(email)\r\n        user = self.model(email=email, **extra_fields)\r\n        user.set_password(password)\r\n        user.save(using=self._db)\r\n        return user\r\n\r\n    def create_superuser(self, email, password=None, **extra_fields):\r\n        extra_fields.setdefault('is_staff', True)\r\n        extra_fields.setdefault('is_superuser', True)\r\n        return self.create_user(email, password, **extra_fields)\r\n\r\n\r\n# Create your models here.\r\nclass CustomUser(AbstractUser):\r\n    # 추가적인 사용자 필드들을 정의할 수 있습니다\r\n    birthday = models.DateField(null=True, blank=True)\r\n    gender = models.CharField(max_length=10, choices=[('man', '남성'), ('woman', '여성'), ('unsigned', '미정')], null=True,\r\n                              blank=True)\r\n    objects = CustomUserManager()\r\n\r\n    class Meta:\r\n        verbose_name = '사용자'\r\n        verbose_name_plural = '사용자'\r\n        \r\n#정현욱 분석결과 db에 저장\r\n\r\nclass SelectedWorkout(models.Model):\r\n    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)\r\n    workout_name = models.CharField(max_length=100)\r\n    significant_body_part = models.CharField(max_length=50)\r\n\r\n    def __str__(self):\r\n        return f\"{self.user.username}'s selected workout: {self.workout_name}\"
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/account/models.py b/account/models.py
+--- a/account/models.py	(revision db3b7e47a98b0dd2bb8def5d912869b0c29e5dff)
++++ b/account/models.py	(date 1715777282986)
+@@ -30,8 +30,9 @@
+     class Meta:
+         verbose_name = '사용자'
+         verbose_name_plural = '사용자'
+-        
+-#정현욱 분석결과 db에 저장
++
++
++# 정현욱 분석결과 db에 저장
+ 
+ class SelectedWorkout(models.Model):
+     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+Index: account/views.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from django.contrib import auth, messages\r\nfrom django.contrib.auth import authenticate, login, logout\r\nfrom django.contrib.auth.hashers import make_password, check_password\r\nfrom django.contrib.auth.models import User\r\nfrom django.http import HttpResponse\r\nfrom django.shortcuts import render, redirect\r\nfrom django.urls import reverse\r\nfrom main.models import UserBia, WorkoutData\r\nfrom .models import CustomUser, CustomUserManager\r\nfrom .forms import UserForm, UserUpdateForm\r\nfrom django.contrib.auth.decorators import login_required\r\nfrom .models import SelectedWorkout\r\n\r\n\r\n\r\ndef signup_view(request):\r\n    if request.method == 'POST':\r\n        form = UserForm(request.POST)\r\n        if form.is_valid():\r\n            try:\r\n                form.save()\r\n                username = form.cleaned_data.get('id_username')\r\n                raw_password = form.cleaned_data.get('id_password1')\r\n                user = authenticate(username=username, password=raw_password)  # 사용자 인증\r\n                # 홈 페이지로 리다이렉트\r\n                return redirect('/')\r\n            except Exception as e:\r\n                # 사용자 생성 실패 시 에러 메시지 전달\r\n                print(f\"An exception occurred: {e}\")\r\n                return render(request, 'signup.html', )\r\n    else:\r\n        form = UserForm()\r\n\r\n    return render(request, 'signup.html', {'form': form})\r\n\r\n\r\ndef logout_view(request):\r\n    logout(request)\r\n    messages.success(request, '로그아웃 되었습니다.')\r\n    return redirect('/')\r\n\r\n\r\ndef profile_view(request):\r\n    # 세션에서 현재 사용자 정보 가져오기\r\n    username = request.user.username\r\n\r\n    if not username:\r\n        return redirect('/')  # 로그인 상태가 아니라면 로그인 페이지로 리다이렉트\r\n\r\n    # 사용자 정보를 가져오기\r\n    account = CustomUser.objects.get(username=username)\r\n\r\n    if request.method == 'POST':\r\n        if 'make_model' in request.POST:\r\n            return redirect(reverse('biaengine:makemodel'))\r\n\r\n    context = {'username': account.username}\r\n    return render(request, 'profile.html', context)\r\n\r\ndef delete_view(request):\r\n    request.user.delete()\r\n    logout(request)\r\n    messages.success(request, '탈퇴 되었습니다.')\r\n    return redirect('/')\r\n\r\ndef userInformation_view(request):\r\n    if request.user.is_authenticated:\r\n        # 인증된 사용자인 경우\r\n        username = request.user.username\r\n        account = CustomUser.objects.get(username=username)\r\n        context = {'user': account}\r\n        return render(request, 'userInformation.html', context)\r\n    else:\r\n        # 인증되지 않은 사용자는 로그인 페이지로 리디렉션\r\n        return redirect('/')\r\n\r\ndef update_view(request):\r\n    if request.user.is_authenticated:\r\n        # 인증된 사용자인 경우\r\n        username = request.user.username\r\n        account = CustomUser.objects.get(username=username)\r\n        form = UserUpdateForm(instance=account)\r\n        if request.method == 'POST':\r\n            form = UserUpdateForm(request.POST, instance=account)\r\n            form.username = username\r\n            if form.is_valid():\r\n                form.save()\r\n                return redirect('/')\r\n        context = {'user': account, 'form': form}\r\n        return render(request, 'update.html', context)\r\n    else:\r\n        # 인증되지 않은 사용자는 로그인 페이지로 리디렉션\r\n        return redirect('/')\r\n\r\ndef dietmenu_view(request):\r\n    if request.user.is_authenticated:\r\n        username = request.user.username\r\n        account = CustomUser.objects.get(username=username)\r\n        context = {'user': account}\r\n        return render(request, 'dietmenu.html', context)\r\n    else:\r\n        # 인증되지 않은 사용자는 로그인 페이지로 리디렉션\r\n        return redirect('/')\r\n\r\ndef biagraph_view(request):\r\n    if request.user.is_authenticated:\r\n        username = request.user.username\r\n        account = CustomUser.objects.get(username=username)\r\n        context = {'user': account}\r\n        return render(request, 'biagraph.html', context)\r\n    else:\r\n        # 인증되지 않은 사용자는 로그인 페이지로 리디렉션\r\n        return redirect('/')\r\n\r\ndef select_workouts(significants):\r\n    # 요일별 운동 종목 선택 로직\r\n    day_workouts = {\r\n        '월': [],\r\n        '화': [],\r\n        '수': [],\r\n        '목': [],\r\n        '금': [],\r\n        '토': [],\r\n        '일': []\r\n    }\r\n\r\n    # 가슴 및 이두 운동 선택\r\n    chest_workouts = WorkoutData.objects.filter(part='가슴', target__contains='대흉근').exclude(\r\n        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:3]\r\n    biceps_workouts = WorkoutData.objects.filter(part='팔', target__contains='이두근').exclude(\r\n        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:1]\r\n\r\n    # 등 및 삼두 운동 선택\r\n    back_workouts = WorkoutData.objects.filter(part='등', target__contains='광배근').exclude(\r\n        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:3]\r\n    triceps_workouts = WorkoutData.objects.filter(part='팔', target__contains='삼두근').exclude(\r\n        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:1]\r\n\r\n    # 어깨 및 하체 운동 선택\r\n    shoulder_workouts = WorkoutData.objects.filter(part='어깨', target__contains='전면삼각근').exclude(\r\n        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:2]\r\n    leg_workouts = WorkoutData.objects.filter(part='하체', target__contains='대퇴사두근').exclude(\r\n        etc__contains='허리부담' if 'waist' in significants else '').order_by('?')[:2]\r\n\r\n    # 운동 프로그램 구성\r\n    for day in ['월', '목']:\r\n        day_workouts[day].extend(chest_workouts.values_list('name', flat=True))\r\n        day_workouts[day].extend(biceps_workouts.values_list('name', flat=True))\r\n    for day in ['화', '금']:\r\n        day_workouts[day].extend(back_workouts.values_list('name', flat=True))\r\n        day_workouts[day].extend(triceps_workouts.values_list('name', flat=True))\r\n    for day in ['수', '토']:\r\n        day_workouts[day].extend(shoulder_workouts.values_list('name', flat=True))\r\n        day_workouts[day].extend(leg_workouts.values_list('name', flat=True))\r\n    for day in ['일']:\r\n        day_workouts[day].extend(['일요일은 쉬는 날!'])\r\n    return day_workouts\r\n\r\ndef result_view(request):\r\n    current_username = request.user.username\r\n    user_bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()\r\n\r\n    if user_bia:\r\n        significants = user_bia.significants\r\n        print(significants)\r\n        day_workouts = select_workouts(significants)\r\n    else:\r\n        day_workouts = {}\r\n\r\n    # 운동 데이터에 설명 추가\r\n    workout_data = {}\r\n    for day, workout_list in day_workouts.items():\r\n        workout_data[day] = []\r\n        for workout_name in workout_list:\r\n            if workout_name == '일요일은 쉬는 날!':\r\n                workout_data[day].append({'name': workout_name, 'caption': ''})\r\n            else:\r\n                try:\r\n                    workout_obj = WorkoutData.objects.get(name=workout_name)\r\n                    workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})\r\n                except WorkoutData.DoesNotExist:\r\n                    workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})\r\n\r\n    context = {\r\n        'user_id': current_username,\r\n        'status': user_bia.status if user_bia else '상태 정보 없음',\r\n        'day_workouts': workout_data,\r\n    }\r\n\r\n    return render(request, 'result.html', context)\r\n\r\n# 정현욱 분석결과 db에 저장\r\ndef save_selected_workouts(user, selected_workouts):\r\n    for day, workouts in selected_workouts.items():\r\n        for workout, significant in workouts.items():\r\n            selected_workout = SelectedWorkout(user=user, workout_name=workout, significant_body_part=significant)\r\n            selected_workout.save()
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/account/views.py b/account/views.py
+--- a/account/views.py	(revision db3b7e47a98b0dd2bb8def5d912869b0c29e5dff)
++++ b/account/views.py	(date 1715777282991)
+@@ -4,7 +4,6 @@
+ from django.contrib.auth.models import User
+ from django.http import HttpResponse
+ from django.shortcuts import render, redirect
+-from django.urls import reverse
+ from main.models import UserBia, WorkoutData
+ from .models import CustomUser, CustomUserManager
+ from .forms import UserForm, UserUpdateForm
+@@ -49,11 +48,6 @@
+ 
+     # 사용자 정보를 가져오기
+     account = CustomUser.objects.get(username=username)
+-
+-    if request.method == 'POST':
+-        if 'make_model' in request.POST:
+-            return redirect(reverse('biaengine:makemodel'))
+-
+     context = {'username': account.username}
+     return render(request, 'profile.html', context)
+ 
+@@ -144,14 +138,11 @@
+ 
+     # 운동 프로그램 구성
+     for day in ['월', '목']:
+-        day_workouts[day].extend(chest_workouts.values_list('name', flat=True))
+-        day_workouts[day].extend(biceps_workouts.values_list('name', flat=True))
++        day_workouts[day].extend(list(chest_workouts) + list(biceps_workouts))
+     for day in ['화', '금']:
+-        day_workouts[day].extend(back_workouts.values_list('name', flat=True))
+-        day_workouts[day].extend(triceps_workouts.values_list('name', flat=True))
++        day_workouts[day].extend(list(back_workouts) + list(triceps_workouts))
+     for day in ['수', '토']:
+-        day_workouts[day].extend(shoulder_workouts.values_list('name', flat=True))
+-        day_workouts[day].extend(leg_workouts.values_list('name', flat=True))
++        day_workouts[day].extend(list(shoulder_workouts) + list(leg_workouts))
+     for day in ['일']:
+         day_workouts[day].extend(['일요일은 쉬는 날!'])
+     return day_workouts
+@@ -162,34 +153,18 @@
+ 
+     if user_bia:
+         significants = user_bia.significants
+-        print(significants)
+-        day_workouts = select_workouts(significants)
++        workouts = select_workouts(significants)
+     else:
+-        day_workouts = {}
+-
+-    # 운동 데이터에 설명 추가
+-    workout_data = {}
+-    for day, workout_list in day_workouts.items():
+-        workout_data[day] = []
+-        for workout_name in workout_list:
+-            if workout_name == '일요일은 쉬는 날!':
+-                workout_data[day].append({'name': workout_name, 'caption': ''})
+-            else:
+-                try:
+-                    workout_obj = WorkoutData.objects.get(name=workout_name)
+-                    workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})
+-                except WorkoutData.DoesNotExist:
+-                    workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})
++        workouts = {}
+ 
+     context = {
+         'user_id': current_username,
+         'status': user_bia.status if user_bia else '상태 정보 없음',
+-        'day_workouts': workout_data,
++        'day_workouts': workouts,
+     }
+ 
+     return render(request, 'result.html', context)
+-
+-# 정현욱 분석결과 db에 저장
++#정현욱 분석결과 db에 저장
+ def save_selected_workouts(user, selected_workouts):
+     for day, workouts in selected_workouts.items():
+         for workout, significant in workouts.items():

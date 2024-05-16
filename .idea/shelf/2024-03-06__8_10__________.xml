@@ -1,0 +1,104 @@
+<changelist name="2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]" date="1709723439678" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/shelved.patch" />
+  <option name="DESCRIPTION" value="2024-03-06 오후 8:10, 업데이트 전에 커밋되지 않은 변경 내용 [변경]" />
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/f2py.exe" />
+    <option name="AFTER_PATH" value="Scripts/f2py.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/f2py.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Lib/site-packages/cv2/cv2.pyd" />
+    <option name="AFTER_PATH" value="Lib/site-packages/cv2/cv2.pyd" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/cv2.pyd" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/ttx.exe" />
+    <option name="AFTER_PATH" value="Scripts/ttx.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/ttx.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Lib/site-packages/pip-23.3.2.dist-info/REQUESTED" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pip3.12.exe" />
+    <option name="AFTER_PATH" value="Scripts/pip3.12.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pip3.12.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pyftsubset.exe" />
+    <option name="AFTER_PATH" value="Scripts/pyftsubset.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pyftsubset.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/fonttools.exe" />
+    <option name="AFTER_PATH" value="Scripts/fonttools.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/fonttools.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Lib/site-packages/pip-23.3.2.dist-info/RECORD" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/sqlformat.exe" />
+    <option name="AFTER_PATH" value="Scripts/sqlformat.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/sqlformat.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Lib/site-packages/pip-23.3.2.dist-info/INSTALLER" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pytesseract.exe" />
+    <option name="AFTER_PATH" value="Scripts/pytesseract.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pytesseract.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pip3.exe" />
+    <option name="AFTER_PATH" value="Scripts/pip3.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pip3.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Lib/site-packages/pip-23.3.2.dist-info/WHEEL" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pip.exe" />
+    <option name="AFTER_PATH" value="Scripts/pip.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pip.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Lib/site-packages/pip-23.3.2.dist-info/METADATA" />
+    <option name="AFTER_PATH" />
+    <option name="SHELVED_PATH" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pythonw.exe" />
+    <option name="AFTER_PATH" value="Scripts/pythonw.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pythonw.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/django-admin.exe" />
+    <option name="AFTER_PATH" value="Scripts/django-admin.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/django-admin.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/python.exe" />
+    <option name="AFTER_PATH" value="Scripts/python.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/python.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/waitress-serve.exe" />
+    <option name="AFTER_PATH" value="Scripts/waitress-serve.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/waitress-serve.exe" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="Scripts/pyftmerge.exe" />
+    <option name="AFTER_PATH" value="Scripts/pyftmerge.exe" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/2024-03-06_오후_8_10,_업데이트_전에_커밋되지_않은_변경_내용_[변경]/pyftmerge.exe" />
+  </binary>
+</changelist>
