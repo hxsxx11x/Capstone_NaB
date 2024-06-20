@@ -195,13 +195,9 @@
                         <tr>
                             <td>{{ day }}</td>
                             <td>
-                                {% if day == "일" %}
-                                    일요일은 쉬는 날!
-                                {% else %}
-                                    {% for exercise in exercises %}
-                                        <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
-                                    {% endfor %}
-                                {% endif %}    
+                                {% for exercise in exercises %}
+                                    <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
                             </td>
                         {% endfor %}
                 </tbody>

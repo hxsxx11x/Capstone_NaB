@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="2차 데모(미완)&#10;significant 오류 수정">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" beforeDir="false" />
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NaB/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NaB/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biaengine/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/biaengine/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biaengine/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/biaengine/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/result.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/imageinput/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/imageinput/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/significants/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/significants/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" beforeDir="false" afterPath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/significants/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/significants/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +292,7 @@
       <workItem from="1715776672809" duration="21591000" />
       <workItem from="1718454111684" duration="2659000" />
       <workItem from="1718673546398" duration="5344000" />
-      <workItem from="1718820223013" duration="5370000" />
+      <workItem from="1718820223013" duration="13559000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -417,7 +414,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715778354694</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용">
+      <option name="closed" value="true" />
+      <created>1718861520241</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1718861520241</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,7 +469,8 @@
     <MESSAGE value="메인화면에서 로그인 기능 사용 가능하도록 변경" />
     <MESSAGE value="1차 데모" />
     <MESSAGE value="OCR 결과 확인 및 운동 설명 확인 기능 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="OCR 결과 확인 및 운동 설명 확인 기능 추가" />
+    <MESSAGE value="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용" />
+    <option name="LAST_COMMIT_MESSAGE" value="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

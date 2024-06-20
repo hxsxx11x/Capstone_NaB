@@ -10,7 +10,35 @@ def significants(request):
     if request.method == 'POST':
         form = HealthSignificantsForm(request.POST)
         if form.is_valid():
-            checked_significants = form.cleaned_data['health_significants']
+            checked_significants = []
+
+            if 'target' in request.POST:
+                checked_significants.append(request.POST['target'])
+            if 'recommendexercise' in request.POST:
+                checked_significants.append(request.POST['recommendexercise'])
+            if 'selected_recommendexercise' in request.POST:
+                checked_significants.extend(request.POST.getlist('selected_recommendexercise'))
+            if 'muscle' in request.POST:
+                checked_significants.append(request.POST['muscle'])
+            if 'cardio' in request.POST:
+                checked_significants.append(request.POST['cardio'])
+            if 'time' in request.POST:
+                checked_significants.append(request.POST['time'])
+            if 'health_significants' in request.POST:
+                checked_significants.extend(request.POST.getlist('health_significants'))
+            if 'recommenddiet' in request.POST:
+                checked_significants.append(request.POST['recommenddiet'])
+            if 'allergy' in request.POST:
+                checked_significants.extend(request.POST.getlist('allergy'))
+            if 'selected_recommenddiet' in request.POST:
+                checked_significants.extend(request.POST.getlist('selected_recommenddiet'))
+            if 'selected_meal' in request.POST:
+                checked_significants.extend(request.POST.getlist('selected_meal'))
+            if 'recommendsnack' in request.POST:
+                checked_significants.append(request.POST['recommendsnack'])
+            if 'selected_snack' in request.POST:
+                checked_significants.extend(request.POST.getlist('selected_snack'))
+
             print("Checked Significants:",checked_significants)  # 디버깅 출력
             current_username = request.user.username
             bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
@@ -36,6 +64,8 @@ def significants(request):
             )
             user_bia.save()
             print('saved')
+
+            request.session['checked_significants'] = checked_significants
 
             return redirect('biaengine:status')
     else:

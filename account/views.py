@@ -194,18 +194,45 @@ def select_workouts(significants):
         leg_workouts = leg_workouts.exclude(etc__contains='무릎')
     leg_workouts = leg_workouts.order_by('?')[:2]
 
-    # 운동 프로그램 구성
-    for day in ['월', '목']:
-        day_workouts[day].extend(chest_workouts.values_list('name', flat=True))
-        day_workouts[day].extend(biceps_workouts.values_list('name', flat=True))
-    for day in ['화', '금']:
-        day_workouts[day].extend(back_workouts.values_list('name', flat=True))
-        day_workouts[day].extend(triceps_workouts.values_list('name', flat=True))
-    for day in ['수', '토']:
-        day_workouts[day].extend(shoulder_workouts.values_list('name', flat=True))
-        day_workouts[day].extend(leg_workouts.values_list('name', flat=True))
-    for day in ['일']:
-        day_workouts[day].extend(['일요일은 쉬는 날!'])
+    day_parts = {
+        '월': ['가슴', '이두'],
+        '화': ['등', '삼두'],
+        '수': ['어깨', '하체'],
+        '목': ['가슴', '이두'],
+        '금': ['등', '삼두'],
+        '토': ['어깨', '하체'],
+        '일': ['가슴', '이두']
+    }
+
+    # 사용자가 선택한 요일에 운동 배정
+    days = {'mon': '월', 'tue': '화', 'wed': '수', 'thu': '목', 'fri': '금', 'sat': '토', 'sun': '일'}
+    selected_days = [days[day] for day in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] if
+                     f'exercise_selected_{day}' in significants]
+
+    unselected_days = [day for day in ['월', '화', '수', '목', '금', '토', '일'] if day not in selected_days]
+    for day in unselected_days:
+        day_workouts[day].append('오늘은 운동 쉬는 날!')
+
+    if not selected_days:
+        selected_days = ['월', '화', '수', '목', '금', '토']
+
+    for day in selected_days:
+        parts = day_parts[day]
+        for part in parts:
+            if part == '가슴':
+                day_workouts[day].extend(chest_workouts.values_list('name', flat=True))
+            elif part == '이두':
+                day_workouts[day].extend(biceps_workouts.values_list('name', flat=True))
+            elif part == '등':
+                day_workouts[day].extend(back_workouts.values_list('name', flat=True))
+            elif part == '삼두':
+                day_workouts[day].extend(triceps_workouts.values_list('name', flat=True))
+            elif part == '어깨':
+                day_workouts[day].extend(shoulder_workouts.values_list('name', flat=True))
+            elif part == '하체':
+                day_workouts[day].extend(leg_workouts.values_list('name', flat=True))
+
+    print(selected_days)
     print(day_workouts)
     return day_workouts
 
@@ -219,13 +246,14 @@ def result_view(request):
         waist_issue = 'waist' in significants
         elbow_issue = 'elbow' in significants
         knee_issue = 'knee' in significants
-        shoulder_issue = 'shouder' in significants
+        shoulder_issue = 'shoulder' in significants
         is_issue = waist_issue or elbow_issue or knee_issue or shoulder_issue
         day_workouts = select_workouts(significants)
     else:
         day_workouts = {}
 
     # 운동 데이터에 설명 추가
+    workout_data = {}
     workout_data = {}
     for day, workout_list in day_workouts.items():
         workout_data[day] = []
@@ -234,11 +262,14 @@ def result_view(request):
                 workout_data[day].append({'name': workout_name, 'caption': ''})
             else:
                 try:
-                    workout_obj = WorkoutData.objects.get(name=workout_name)
-                    workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})
+                    # get() 대신 filter()를 사용하여 모든 객체를 가져온 후, 첫 번째 객체 선택
+                    workout_obj = WorkoutData.objects.filter(name=workout_name).first()
+                    if workout_obj:
+                        workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})
+                    else:
+                        workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})
                 except WorkoutData.DoesNotExist:
                     workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})
-
     context = {
         'user_id': current_username,
         'status': user_bia.status if user_bia else '상태 정보 없음',

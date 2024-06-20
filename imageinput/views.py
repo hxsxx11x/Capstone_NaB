@@ -45,14 +45,53 @@ def fileupload(request):
         percent_fat = re.findall(r'Percent Body Fat\s*(\d{2}\.\d{1})', results_string)
         bmr = re.findall(r'기초대사량\s*(\d{4})', results_string)
 
-        
-        print("height:", height[-1])
-        print("weight:", weight[-1])
-        print("skeletal:",skeletal[0])
-        print("fat:",fat[-1])
-        print("BMI:",BMI[-1])
-        print("percent_fat:",percent_fat[-1])
-        print("bmr:",bmr[0])
+        if '2022.07.29' in results_string:
+            print(results_string)
+            height = re.findall(r"(\d{3}\.\d{1})cm", results_string)
+            weight = re.findall(r'체중\(kg\)\s*(\d{2}\.\d{1})', results_string)
+            skeletal = re.findall(r'Skeletal Muscle Mass\s*(\d{2}\.\d{1})',
+                                  results_string)
+            fat = re.findall(r'Fat Mass\s*(\d{2}\.\d{1})', results_string)
+            BMI = re.findall(r'(\d{2}\.\d{1})\s*제지방량', results_string)
+            percent_fat = re.findall(r'Percent Body Fat\s*(\d{2}\.\d{1})',
+                                     results_string)
+            bmr = re.findall(r'기초대사량\s*(\d{4})', results_string)
+
+            print("height:", height[-1])
+            print("weight:", weight[-1])
+            print("skeletal:", skeletal[0])
+            print("fat:", fat[-1])
+            print("BMI:", BMI[-1])
+            print("percent_fat:", percent_fat[-1])
+            print("bmr:", bmr[0])
+
+        elif '2022.07.12' in results_string:
+            print(results_string)
+            height = re.findall(r"(\d{3})cm", results_string)
+            weight = re.findall(r'Weiyht(\d{2}\.\d)', results_string)
+            skeletal = re.findall(r'골격근량(\d{2}\.\d)', results_string)
+            fat = re.findall(r'체지방량(\d{2}\.\d)', results_string)
+            BMI = re.findall(r'(\d{2}\.\d)제지방량', results_string)
+            percent_fat = re.findall(r'체지방률(\d{2}\.\d)', results_string)
+            bmr = re.findall(r'기초대사량(\d{4})', results_string)
+
+            print("height:", height)
+            print("weight:", weight)
+            print("skeletal:", skeletal)
+            print("fat:", fat)
+            print("BMI:", BMI)
+            print("percent_fat:", percent_fat)
+            print("bmr:", bmr)
+
+            '''
+            print("height:", height[-1])
+            print("weight:", weight[-1])
+            print("skeletal:", skeletal[0])
+            print("fat:", fat[-1])
+            print("BMI:", BMI[-1])
+            print("percent_fat:", percent_fat[-1])
+            print("bmr:", bmr[0])
+            '''
 
         #ocr로 읽은 정보 프론트로 보냄
         context = {'height':height,
