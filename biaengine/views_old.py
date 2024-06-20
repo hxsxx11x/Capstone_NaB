@@ -26,33 +26,51 @@ def status_predict(request):
     current_username = request.user.username
     bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
     if bia:
-        bmi = bia.bmi
-        weight = bia.weight
-        skeletal = bia.skeletal
+        new_data = np.array([[
+            0,
+            25,
+            bia.height,
+            bia.weight,
+            bia.skeletal,
+            bia.fat_per,
+            bia.bmi,
+            bia.fat,
+            bia.bmr]])
+        # 번호는 의미없는 값이기에 제거
 
-        skeletal_ratio = (skeletal / weight) * 100
+        current_dir = os.path.dirname(__file__)
+        model_path = os.path.join(current_dir, 'bia_model.keras')
 
-        if bmi < 18.5:
+        new_data = new_data.astype(np.float32)
+        scaler = StandardScaler()
+        new_data = scaler.fit_transform(new_data)
+        bia_model = keras.models.load_model(model_path)
+        predictions = bia_model.predict(new_data)
+
+        predictions = np.argmax(predictions, axis=1)
+        predictions = int(predictions)  # numpy array -> int 형변환
+        print(predictions)
+
+        if predictions == 0:
             status = "저체중"
-        elif 18.5 <= bmi < 23:
-            if skeletal_ratio < 48:
-                status = "적정체중"
-            else:
-                status = "근육형 적정체중"
-        elif 23 <= bmi < 25:
-            if skeletal_ratio < 48:
-                status = "과체중"
-            else:
-                status = "근육형 과체중"
-        elif 25 <= bmi < 30:
-            status = "1단계 비만"
-        elif 30 <= bmi < 35:
-            status = "2단계 비만"
+        elif predictions == 1:
+            status = '적정체중'
+        elif predictions == 2:
+            status = '근육형 적정체중'
+        elif predictions == 3:
+            status = '근육형 과체중'
+        elif predictions == 4:
+            status = '과체중'
+        elif predictions == 5:
+            status = '1단계 비만'
+        elif predictions == 6:
+            status = '2단계 비만'
         else:
-            status = "3단계 비만"
+            status = '3단계 비만'
 
         bia.status = status
         bia.save()
+        print(predictions)
 
         request.session['user_id'] = current_username
         request.session['status'] = status

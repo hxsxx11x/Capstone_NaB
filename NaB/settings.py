@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'NaB.urls'
-# CSRF_TRUSTED_ORIGINS = ["https://192.168.56.1:8321"]
+CSRF_TRUSTED_ORIGINS = ["https://steady-mistakenly-yeti.ngrok-free.app"]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

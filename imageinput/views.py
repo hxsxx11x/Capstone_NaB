@@ -5,6 +5,7 @@ from imutils.contours import sort_contours
 from main.models import UserBia
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
+from main.apps import MainConfig
 import matplotlib.pyplot as plt
 import pytesseract
 import imutils
@@ -15,6 +16,7 @@ import requests
 import numpy as np
 import os
 import easyocr
+
 
 def fileupload(request):
     if request.method == 'POST' and 'image' in request.FILES:
@@ -28,11 +30,10 @@ def fileupload(request):
         print(text)
         '''
 
-        reader = easyocr.Reader(['ko', 'en'])
         uploaded_image = request.FILES['image']
         image = cv2.imdecode(np.frombuffer(uploaded_image.read(), np.uint8), cv2.IMREAD_COLOR)
         rgb_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        results = reader.readtext(rgb_image, detail=0)
+        results = MainConfig.reader.readtext(rgb_image, detail=0)
 
         results_string =''.join(''.join(map(str, sublist)) for sublist in results)
 

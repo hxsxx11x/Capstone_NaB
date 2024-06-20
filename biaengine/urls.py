@@ -5,5 +5,5 @@ app_name = 'biaengine'
 
 urlpatterns = [
     path('status/', status_predict, name='status'),
-    path('makemodel', make_model, name='makemodel')
+    #path('makemodel', make_model, name='makemodel')
 ]

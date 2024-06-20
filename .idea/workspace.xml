@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="OCR 결과 확인 및 운동 설명 확인 기능 추가">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-05-15__10_05__________.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/2024-05-15__10_05__________.xml" afterDir="false" />
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="2차 데모(미완)&#10;significant 오류 수정">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-03-06__8_10__________.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/2024-04-18__10_01__________.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NaB/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NaB/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biaengine/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/biaengine/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biaengine/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/biaengine/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/imageinput/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/imageinput/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,6 +139,7 @@
     </configuration>
     <configuration name="views" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="NaB" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -157,6 +162,7 @@
     </configuration>
     <configuration name="NaB" type="Python.DjangoServer" factoryName="Django server">
       <module name="NaB" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -287,6 +293,9 @@
       <workItem from="1715423399941" duration="892000" />
       <workItem from="1715773250380" duration="600000" />
       <workItem from="1715776672809" duration="21591000" />
+      <workItem from="1718454111684" duration="2659000" />
+      <workItem from="1718673546398" duration="5344000" />
+      <workItem from="1718820223013" duration="5370000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
