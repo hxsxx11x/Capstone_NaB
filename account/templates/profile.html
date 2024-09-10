@@ -11,7 +11,6 @@
     
  {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" /> 부트스트랩4 온라인 링크 오류날 시 사용{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/profile.css'%}" />
-    
   
     <link
       href="https://i.postimg.cc/xdmYFx3Q/1.png"
@@ -26,19 +25,19 @@
   </head>
   <body>
       <nav class="navigator" style="min-width:400px">
-          <a class="logo" href="http://127.0.0.1:8000/account/">
+          <a class="logo" href="{% url 'account:profile'%}">
             <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
           </a>
         <ul style="float:right;">
-          <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/image/upload/">체성분 분석</a></li>
+          <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
           <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
-          <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/userInformation">마이페이지</a></li>
-          <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/logout">로그아웃</a></li>
+          <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+          <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
         </ul>
       </nav>
     <div class="item">
       <div class = "fill">
-        <h2 class="font" style="text-align: center; margin-top: 20px; margin-bottom:20px;">
+        <h2 class="font" style="text-align: center;">
           환영합니다, {{ username }}님!
         </h2>
       </div>
@@ -53,7 +52,6 @@
         margin-bottom: 30px;
       "
     >
-      <div style="margin-top: 30px"></div>
       <div>
         <div class="main-content">
           <div class = "main-program">
@@ -140,7 +138,6 @@
           </div>
         </div>
       </div>
-       <div style="margin-top: 30px"></div>
     </div>
   </body>
 </html>

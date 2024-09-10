@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from main.models import UserBia, WorkoutData
+from main.models import UserBia, WorkoutData, DietData
 from .models import CustomUser, CustomUserManager, SelectedWorkout
 from .forms import UserForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import SelectedWorkout
-
+from django.utils import timezone
 
 
 def signup_view(request):
@@ -236,40 +236,71 @@ def select_workouts(significants):
     print(day_workouts)
     return day_workouts
 
+
 def result_view(request):
     current_username = request.user.username
     user_bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
 
     if user_bia:
         significants = user_bia.significants
-        print(significants)
+        recommend_exercise = 'recommendexercise_yse' in significants
         waist_issue = 'waist' in significants
         elbow_issue = 'elbow' in significants
         knee_issue = 'knee' in significants
         shoulder_issue = 'shoulder' in significants
-        is_issue = waist_issue or elbow_issue or knee_issue or shoulder_issue
-        day_workouts = select_workouts(significants)
+        is_issue = waist_issue or elbow_issue or knee_issue or shoulder_issue   
+        recommend_diet = 'recommenddiet_yes' in significants
+        
+        if recommend_exercise:
+            # 저장된 운동 목록이 있으면 불러옴, 없으면 새로 생성
+            if SelectedWorkout.objects.filter(user=request.user).exists():
+                userid = request.user.id
+                selected_workouts = SelectedWorkout.objects.filter(user=userid).order_by('-id').first()
+                print(f"Workout: {selected_workouts.workout_name}, Logged at: {selected_workouts.timelog}")
+                current_time = timezone.localtime()
+                time_difference = current_time - selected_workouts.timelog
+                print(f"{time_difference}")
+                diff_minute = time_difference.seconds //60 # 분단위로 변경
+                print(f"{diff_minute}")
+                
+                #운동리스트가 저장된지 2분이 지난 경우 다시생성(발표때 너무 길다고 판단되면 시간 변경)
+                if diff_minute < 2:
+                    day_workouts = get_saved_workouts(request.user)
+                else:
+                    day_workouts = select_workouts(significants)
+                    save_selected_workouts(request.user, day_workouts)
+
+            else:
+                day_workouts = select_workouts(significants)
+                save_selected_workouts(request.user, day_workouts)
+        else:
+            pass
+        if recommend_diet:
+            final_user_bmr = calculrate_kcal(request.user, significants)
+
+            #식단 생성(미완)
+            # select_diet(request.user ,significants, final_user_bmr)
+            pass
+        else:
+            pass
     else:
         day_workouts = {}
 
     # 운동 데이터에 설명 추가
     workout_data = {}
-    workout_data = {}
     for day, workout_list in day_workouts.items():
         workout_data[day] = []
-        for workout_name in workout_list:
+        for workout in workout_list:
+            workout_name = workout  # workout은 문자열
             if workout_name == '일요일은 쉬는 날!':
                 workout_data[day].append({'name': workout_name, 'caption': ''})
             else:
-                try:
-                    # get() 대신 filter()를 사용하여 모든 객체를 가져온 후, 첫 번째 객체 선택
-                    workout_obj = WorkoutData.objects.filter(name=workout_name).first()
-                    if workout_obj:
-                        workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})
-                    else:
-                        workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})
-                except WorkoutData.DoesNotExist:
+                workout_obj = WorkoutData.objects.filter(name=workout_name).first()
+                if workout_obj:
+                    workout_data[day].append({'name': workout_obj.name, 'caption': workout_obj.caption})
+                else:
                     workout_data[day].append({'name': workout_name, 'caption': '설명이 없습니다.'})
+
     context = {
         'user_id': current_username,
         'status': user_bia.status if user_bia else '상태 정보 없음',
@@ -281,8 +312,252 @@ def result_view(request):
 
 # 정현욱 분석결과 db에 저장
 
+#db에 운동을 저장하는 함수
 def save_selected_workouts(user, selected_workouts):
+    SelectedWorkout.objects.filter(user=user).delete()
+    
     for day, workouts in selected_workouts.items():
-        for workout, significant in workouts.items():
-            selected_workout = SelectedWorkout(user=user, workout_name=workout, significant_body_part=significant)
+        for workout in workouts:
+            selected_workout = SelectedWorkout(
+                user=user,
+                workout_name=workout,
+                day=day
+            )
             selected_workout.save()
+
+#db에 저장된 운동들을 가져오는 함수
+def get_saved_workouts(user):
+    selected_workouts = SelectedWorkout.objects.filter(user=user)
+    day_workouts = {day: [] for day in ['월', '화', '수', '목', '금', '토', '일']}
+    
+    for workout in selected_workouts:
+        day_workouts[workout.day].append(workout.workout_name)
+    
+    return day_workouts
+
+#기초대사량+활동대사량 계산 함수(단위: kcal)
+def calculrate_kcal(user,significants):
+    current_username = user.username
+    user_bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
+
+    days = {'mon': '월', 'tue': '화', 'wed': '수', 'thu': '목', 'fri': '금', 'sat': '토', 'sun': '일'}
+    exercise_selected_days = [days[day] for day in ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'] if
+                     f'exercise_selected_{day}' in significants]
+    exercise_selected_days_number = len(exercise_selected_days)
+    print(exercise_selected_days_number)
+    
+    #기초대사량 + 활동대사량
+    if exercise_selected_days_number == 0:
+        user_bmr = user_bia.bmr * 1.2
+    elif exercise_selected_days_number < 3:
+        user_bmr = user_bia.bmr * 1.375
+    elif 3 <= exercise_selected_days_number <=5:
+        user_bmr = user_bia.bmr * 1.555
+    elif 6 <= exercise_selected_days_number <=7 and "inactive_occupation" in significants:
+        user_bmr = user_bia.bmr * 1.725
+    elif 6 <= exercise_selected_days_number <= 7 and "active_occupation" in significants:
+        user_bmr = user_bia.bmr * 1.9
+    else:
+        pass
+
+    #목표까지 고려한 bmr
+    if "target_diet" in significants:
+        total_user_bmr = user_bmr * 0.8
+    elif "target_keep" in significants:
+        total_user_bmr = user_bmr
+    elif "target_bulkup" in significants:
+        total_user_bmr = user_bmr * 1.2
+    else:
+        total_user_bmr = user_bmr
+    
+    #간식 추천시 bmr
+    if "recommendsnack_yes" in significants:
+        final_user_bmr = total_user_bmr - 200
+    elif "recommendsnack_no" in significants:
+        final_user_bmr = total_user_bmr
+    else:
+        final_user_bmr = total_user_bmr
+    
+    final_user_bmr = int(final_user_bmr)
+    print(f"최종 칼로리: {final_user_bmr}")
+    
+    return final_user_bmr
+
+#식단 생성 함수
+# def select_diet(user, significants, final_user_bmr):
+#     current_username = user.username
+#     user_bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()
+
+#     #탄단지 분배(5:3:2)
+#     user_carbohydrate_kcal = final_user_bmr * 0.5
+#     user_protein_kcal = final_user_bmr * 0.3
+#     user_province_kcal = final_user_bmr * 0.2
+    
+#     #탄단지 그램으로 변경
+#     user_carbohydrate_gram = user_carbohydrate_kcal / 4
+#     user_protein_gram = user_protein_kcal / 4
+#     user_province_gram = user_province_kcal / 9
+#     print(f"탄수화물(g): {user_carbohydrate_gram}")
+#     print(f"단백질(g): {user_protein_gram}" )
+#     print(f"지방(g): {user_province_gram}")
+
+#     #한끼로 변경
+#     one_meal_kcal = final_user_bmr/3
+#     one_meal_user_protein_gram = user_protein_gram/3
+#     one_meal_user_carbohydrate_gram = user_carbohydrate_gram/3
+
+#     # 요일별 식단 선택 로직
+#     day_diet = {
+#         '월': [],
+#         '화': [],
+#         '수': [],
+#         '목': [],
+#         '금': [],
+#         '토': [],
+#         '일': []
+#     }
+
+#     meals = {'breakfast': '아침', 'lunch': '점심', 'dinner': '저녁'}
+#     selected_diet_meals = [meals[meal] for meal in ['breakfast', 'lunch', 'dinner'] if
+#                      f'diet_selected_{meal}' in significants]
+    
+#     selected_diet_meals_count= len(selected_diet_meals)
+
+#     if selected_diet_meals_count == 0:
+#         selected_diet_meals = [meals[meal] for meal in ['breakfast', 'lunch', 'dinner']]
+
+#     # 식사에서 탄수화물
+#     carbohydrate_diet = DietData.objects.filter(type='탄수화물', type2='식사')
+#     if 'allergy_buckwheat' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='메밀')
+#     if 'allergy_wheat' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='밀')
+#     if 'allergy_soybean' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='대두')
+#     if 'allergy_peanut' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='땅콩')
+#     if 'allergy_walnut' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='호두')
+#     if 'allergy_pine_nut' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='잣')
+#     if 'allergy_sulfurousacids' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='아황산류')
+#     if 'allergy_peach' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='복숭아')
+#     if 'allergy_tomato' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='토마토')
+#     if 'allergy_eggs' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='계란')
+#     if 'allergy_milk' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='우유')
+#     if 'allergy_shrimp' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='새우')
+#     if 'allergy_macherel' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='고등어')
+#     if 'allergy_squid' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='오징어')
+#     if 'allergy_crab' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='게')
+#     if 'allergy_shellfish' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='조개류')
+#     if 'allergy_pork' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='돼기고기')
+#     if 'allergy_beef' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='쇠고기')
+#     if 'allergy_chicken' in significants:
+#         carbohydrate_diet = carbohydrate_diet.exclude(etc__contains='닭고기')
+#     carbohydrate_diet = carbohydrate_diet.order_by('?')[:selected_diet_meals_count]
+
+#     #식사에서 단백질
+#     protein_diet = DietData.objects.filter(type='단백질', type2='식사')
+#     if 'allergy_buckwheat' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='메밀')
+#     if 'allergy_wheat' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='밀')
+#     if 'allergy_soybean' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='대두')
+#     if 'allergy_peanut' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='땅콩')
+#     if 'allergy_walnut' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='호두')
+#     if 'allergy_pine_nut' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='잣')
+#     if 'allergy_sulfurousacids' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='아황산류')
+#     if 'allergy_peach' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='복숭아')
+#     if 'allergy_tomato' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='토마토')
+#     if 'allergy_eggs' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='계란')
+#     if 'allergy_milk' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='우유')
+#     if 'allergy_shrimp' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='새우')
+#     if 'allergy_macherel' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='고등어')
+#     if 'allergy_squid' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='오징어')
+#     if 'allergy_crab' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='게')
+#     if 'allergy_shellfish' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='조개류')
+#     if 'allergy_pork' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='돼기고기')
+#     if 'allergy_beef' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='쇠고기')
+#     if 'allergy_chicken' in significants:
+#         protein_diet = protein_diet.exclude(etc__contains='닭고기')
+#     protein_diet = protein_diet.order_by('?')[:selected_diet_meals_count]
+
+#     #식사에서 지방
+#     province_diet = DietData.objects.filter(type='지방', type2='식사')
+#     if 'allergy_buckwheat' in significants:
+#         province_diet = province_diet.exclude(etc__contains='메밀')
+#     if 'allergy_wheat' in significants:
+#         province_diet = province_diet.exclude(etc__contains='밀')
+#     if 'allergy_soybean' in significants:
+#         province_diet = province_diet.exclude(etc__contains='대두')
+#     if 'allergy_peanut' in significants:
+#         province_diet = province_diet.exclude(etc__contains='땅콩')
+#     if 'allergy_walnut' in significants:
+#         province_diet = province_diet.exclude(etc__contains='호두')
+#     if 'allergy_pine_nut' in significants:
+#         province_diet = province_diet.exclude(etc__contains='잣')
+#     if 'allergy_sulfurousacids' in significants:
+#         province_diet = province_diet.exclude(etc__contains='아황산류')
+#     if 'allergy_peach' in significants:
+#         province_diet = province_diet.exclude(etc__contains='복숭아')
+#     if 'allergy_tomato' in significants:
+#         province_diet = province_diet.exclude(etc__contains='토마토')
+#     if 'allergy_eggs' in significants:
+#         province_diet = province_diet.exclude(etc__contains='계란')
+#     if 'allergy_milk' in significants:
+#         province_diet = province_diet.exclude(etc__contains='우유')
+#     if 'allergy_shrimp' in significants:
+#         province_diet = province_diet.exclude(etc__contains='새우')
+#     if 'allergy_macherel' in significants:
+#         province_diet = province_diet.exclude(etc__contains='고등어')
+#     if 'allergy_squid' in significants:
+#         province_diet = province_diet.exclude(etc__contains='오징어')
+#     if 'allergy_crab' in significants:
+#         province_diet = province_diet.exclude(etc__contains='게')
+#     if 'allergy_shellfish' in significants:
+#         province_diet = province_diet.exclude(etc__contains='조개류')
+#     if 'allergy_pork' in significants:
+#         province_diet = province_diet.exclude(etc__contains='돼기고기')
+#     if 'allergy_beef' in significants:
+#         province_diet = province_diet.exclude(etc__contains='쇠고기')
+#     if 'allergy_chicken' in significants:
+#         province_diet = province_diet.exclude(etc__contains='닭고기')
+#     province_diet = province_diet.order_by('?')[:selected_diet_meals_count]
+
+#     day_type = {
+#             '월': ['가슴', '이두'],
+#             '화': ['등', '삼두'],
+#             '수': ['어깨', '하체'],
+#             '목': ['가슴', '이두'],
+#             '금': ['등', '삼두'],
+#             '토': ['어깨', '하체'],
+#             '일': ['가슴', '이두']
+#         }

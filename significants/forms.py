@@ -28,6 +28,8 @@ class HealthSignificantsForm(forms.Form):
         ('knee', '무릎 부상'),
         ('recommenddiet_yes', '식단_추천받음'),
         ('recommenddiet_no', '식단_추천거부'),
+        ('inactive_occupation','비활동적인직업'),
+        ('active_occupation','활동적인직업'),
         ('allergy_buckwheat', '알레르기_메밀'),
         ('allergy_wheat', '알레르기_밀'),
         ('allergy_soybean', '알레르기_대두'),

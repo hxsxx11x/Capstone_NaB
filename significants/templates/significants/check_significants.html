@@ -16,6 +16,7 @@
     {% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.css'%}" /> 부트스트랩4 온라인 링크 오류날 시 사용{% endcomment %}
     <link rel="stylesheet" href="{% static 'css/basic.css'%}" />
     <link rel="stylesheet" href="{% static 'css/significants.css'%}" />
+    <script src="{% static 'js/significants.js' %}"></script>
     <style>
         .bottom-border {
             border-style: solid;
@@ -34,22 +35,19 @@
             cursor: pointer;
             color: #007bff;
         }
-        .marginleft_40 {
-            margin-left:-40px;
-        }
     </style>
 </head>
 
 <body>
     <nav class="navigator" style="min-width:400px">
-        <a class="logo" href="http://127.0.0.1:8000/account/">
+        <a class="logo" href="{% url 'account:profile'%}">
           <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
         </a>
       <ul style="float:right;">
-        <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/image/upload/">체성분 분석</a></li>
-        <li class="list_left"><a class="nav_a font">운동 및 식단</a></li>
-        <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/userInformation">마이페이지</a></li>
-        <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/logout">로그아웃</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
       </ul>
     </nav>
     <h1 class="text-center bottom-border font" style="margin-top:10px; margin-bottom:10px;">특이사항 입력</h1>
@@ -78,7 +76,6 @@
         <form method="post" style="margin-top:20px">
             {% csrf_token %}
             {% for choice in form.health_significants %}
-            {% comment %} <div class="form-check border-dfe1e5 d-flex justify-content-between" style="height:50px; font-size:20px;margin-top:10px"> {% endcomment %}
                     <div class="form-check">
                         {% if choice.choice_label == '다이어트' %}
                             <div class="font title">
@@ -88,21 +85,21 @@
                                 <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                             </svg>운동 목표를 설정해 주세요.</div>
                             <label class="form-check-label" for="target_diet">
-                                <input class="form-check-input" type="radio" name="target" id="target_diet" /> <div class="font contents">다이어트</div>
+                                <input class="form-check-input" type="radio" name="target" id="target_diet" value="target_diet" onclick="getRecommendSnack(event)" /> <div class="font contents">다이어트</div>
                             </label>
                             {% endif %}
                     </div>
                     <div class="form-check">
                         {% if choice.choice_label == '체중유지' %}
                         <label class="form-check-label" for="target_keep">
-                            <input class="form-check-input" type="radio" name="target" id="target_keep" /> <div class="font contents">체중유지</div>
+                            <input class="form-check-input" type="radio" name="target" id="target_keep" value="target_keep"/> <div class="font contents">체중유지</div>
                         </label>
                         {% endif %}
                     </div>
                     <div class="form-check">
                         {% if choice.choice_label == '벌크업' %}
                         <label class="form-check-label" for="target_bulkup">
-                            <input class="form-check-input" type="radio" name="target" id="target_bulkup" /> <div class="font contents">벌크업</div>
+                            <input class="form-check-input" type="radio" name="target" id="target_bulkup" value="target_bulkup"/> <div class="font contents">벌크업</div>
                         </label>
                         <div style="margin-bottom:30px;"></div>
                         {% endif %}
@@ -116,15 +113,31 @@
                                 <path d="M3 1.5h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2"/>
                                 <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                             </svg>운동 추천을 받으시겠습니까?</div>
-                            <label class="form-check-label" for="recommendexercise_yse">
-                                <input class="form-check-input" type="radio" name="recommendexercise" id="recommendexercise_yse" /> <div class="font contents">예</div>
+                            <label 
+                            class="form-check-label" 
+                            for="recommendexercise_yse">
+                                <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                name="recommendexercise" 
+                                id="recommendexercise_yse" 
+                                value="recommendexercise_yse" 
+                                onclick='getRecommendExercise(event)' /> 
+                                <div class="font contents">예</div>
                             </label>
                             {% endif %}
                     </div>
                     <div class="form-check">
                         {% if choice.choice_label == '운동 추천거부' %}
                         <label class="form-check-label" for="recommendexercise_no">
-                            <input class="form-check-input" type="radio" name="recommendexercise" id="recommendexercise_no" /> <div class="font contents">아니요</div>
+                            <input 
+                            class="form-check-input"
+                            type="radio" 
+                            name="recommendexercise" 
+                            id="recommendexercise_no" 
+                            value="recommendexercise_no" 
+                            onclick='getRecommendExercise(event)'/>
+                            <div class="font contents">아니요</div>
                         </label>
                         <div style="margin-bottom:30px;"></div>
                         {% endif %}
@@ -197,7 +210,7 @@
                                     <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                                 </svg>근력운동이 익숙하신가요?</div>
                             <label class="form-check-label" for="weight_high">
-                                <input class="form-check-input" type="radio" name="muscle" id="weight_high" /> <div class="font contents">익숙함</div>
+                                <input class="form-check-input" type="radio" name="muscle" id="weight_high" value="weight_high"/> <div class="font contents">익숙함</div>
                             </label>
                         {% endif %}
                     </div>
@@ -205,7 +218,7 @@
                     <div class="form-check">
                         {% if choice.choice_label == '근력 운동이 익숙하지 않음' %}
                             <label class="form-check-label" for="weight_low">
-                                <input class="form-check-input" type="radio" name="muscle" id="weight_low" /> <div class="font contents">익숙하지 않음</div>
+                                <input class="form-check-input" type="radio" name="muscle" id="weight_low" value="weight_low"/> <div class="font contents">익숙하지 않음</div>
                             </label>
                             <div style="margin-bottom:30px;"></div>
                         {% endif %}
@@ -221,14 +234,14 @@
                                 </svg>유산소 운동이 익숙하신가요?
                             </div>
                             <label class="form-check-label" for="cardio_high">
-                                <input class="form-check-input" type="radio" name="cardio" id="cardio_high" /> <div class="font contents"> 익숙함</div>
+                                <input class="form-check-input" type="radio" name="cardio" id="cardio_high" value="cardio_high"/> <div class="font contents"> 익숙함</div>
                             </label>
                         {% endif %}
                     </div>
                 <div class="form-check">
                     {% if choice.choice_label == '유산소 운동이 익숙하지 않음' %}
                         <label class="form-check-label" for="cardio_low">
-                            <input class="form-check-input" type="radio" name="cardio" id="cardio_low" /> <div class="font contents">익숙하지 않음</div>
+                            <input class="form-check-input" type="radio" name="cardio" id="cardio_low" value="cardio_low"/> <div class="font contents">익숙하지 않음</div>
                         </label>
                         <div style="margin-bottom:30px;"></div>
                     {% endif %}
@@ -242,20 +255,20 @@
                             <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                           </svg>평소 운동을 얼마나 하시나요?</div>
                     <label class="form-check-label" for="under1hour">
-                        <input class="form-check-input" type="radio" name="time" id="under1hour" /> <div class="font contents">운동 시간 1시간 이내</div>
+                        <input class="form-check-input" type="radio" name="time" id="under1hour" value="under1hour"/> <div class="font contents">운동 시간 1시간 이내</div>
                     </label>
                     {% endif %}
                 </div>
                 <div class="form-check">
                     {% if choice.choice_label == '운동 시간 1시간 이상' %}
                     <label class="form-check-label" for="over1hour">
-                        <input class="form-check-input" type="radio" name="time" id="over1hour" /> <div class="font contents">운동 시간 1시간 이상</div>
+                        <input class="form-check-input" type="radio" name="time" id="over1hour" value="over1hour"/> <div class="font contents">운동 시간 1시간 이상</div>
                     </label>
                     <div style="margin-bottom:30px;"></div>
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '어깨 부상' %}
                     <div class="font title">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -268,21 +281,21 @@
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '팔꿈치 부상' %}
                     <label class="form-check-label" for="elbow">
                         <input class="form-check-input" type="checkbox" name="health_significants" id="elbow" value="elbow"/> <div class="font contents">팔꿈치 부상</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '허리 부상' %}
                     <label class="form-check-label" for="waist">
                         <input class="form-check-input" type="checkbox" name="health_significants" id="waist" value="waist"/> <div class="font contents">허리 부상</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '무릎 부상' %}
                     <label class="form-check-label" for="knee">
                         <input class="form-check-input" type="checkbox" name="health_significants" id="knee" value="knee"/> <div class="font contents">무릎 부상</div>
@@ -291,7 +304,7 @@
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단_추천받음' %}
                         <div class="font title">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -300,20 +313,42 @@
                             <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                         </svg>식단 추천을 받으시겠습니까?</div>
                         <label class="form-check-label" for="recommenddiet_yes">
-                            <input class="form-check-input" type="radio" name="recommenddiet" id="recommenddiet_yes" /> <div class="font contents">예</div>
+                            <input class="form-check-input" type="radio" name="recommenddiet" id="recommenddiet_yes" value="recommenddiet_yes" onclick="getRecommendDiet(event)" /> <div class="font contents">예</div>
                         </label>
                         {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단_추천거부' %}
                     <label class="form-check-label" for="recommenddiet_no">
-                        <input class="form-check-input" type="radio" name="recommendexercise" id="recommenddiet_no" /> <div class="font contents">아니요</div>
+                        <input class="form-check-input" type="radio" name="recommenddiet" id="recommenddiet_no"  value="recommenddiet_no" onclick="getRecommendDiet(event)"/> <div class="font contents">아니요</div>
                     </label>
                     <div style="margin-bottom:30px;"></div>
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
+                    {% if choice.choice_label == '비활동적인직업' %}
+                        <div class="font title">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
+                            <path fill-rule="evenodd" d="M5 1.5A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5zm5 0a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z"/>
+                            <path d="M3 1.5h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2"/>
+                            <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
+                        </svg>일을 할 때 주로 앉아서 일을 하시나요?</div>
+                        <label class="form-check-label" for="inactive_occupation">
+                            <input class="form-check-input" type="radio" name="occupation" id="inactive_occupation" value = "inactive_occupation" /> <div class="font contents">예</div>
+                        </label>
+                        {% endif %}
+                </div>
+                <div class="form-check">
+                    {% if choice.choice_label == '활동적인직업' %}
+                    <label class="form-check-label" for="active_occupation">
+                        <input class="form-check-input" type="radio" name="occupation" id="active_occupation" value = "active_occupation"/> <div class="font contents">아니요</div>
+                    </label>
+                    <div style="margin-bottom:30px;"></div>
+                    {% endif %}
+                </div>
+
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_메밀' %}
                     <div class="font title">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -326,126 +361,126 @@
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_밀' %}
                     <label class="form-check-label" for="allergy_wheat">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_wheat" value="allergy_wheat"/> <div class="font contents">밀</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_대두' %}
                     <label class="form-check-label" for="allergy_soybean">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_soybean" value="allergy_soybean"/> <div class="font contents">대두</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_땅콩' %}
                     <label class="form-check-label" for="allergy_peanut">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_peanut" value="allergy_peanut"/> <div class="font contents">땅콩</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_호두' %}
                     <label class="form-check-label" for="allergy_walnut">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_walnut" value="allergy_walnut"/> <div class="font contents">호두</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_잣' %}
                     <label class="form-check-label" for="allergy_pine_nut">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_pine_nut" value="allergy_pine_nut"/> <div class="font contents">잣</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_아황산류' %}
                     <label class="form-check-label" for="allergy_sulfurousacids">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_sulfurousacids" value="allergy_sulfurousacids"/> <div class="font contents">아황산류</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_복숭아' %}
                     <label class="form-check-label" for="allergy_peach">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_peach" value="allergy_peach"/> <div class="font contents">복숭아</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_토마토' %}
                     <label class="form-check-label" for="allergy_tomato">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_tomato" value="allergy_tomato"/> <div class="font contents">토마토</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_계란' %}
                     <label class="form-check-label" for="allergy_eggs">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_eggs" value="allergy_eggs"/> <div class="font contents">계란</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_우유' %}
                     <label class="form-check-label" for="allergy_milk">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_milk" value="allergy_milk"/> <div class="font contents">우유</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_새우' %}
                     <label class="form-check-label" for="allergy_shrimp">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_shrimp" value="allergy_shrimp"/> <div class="font contents">새우</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_고등어' %}
                     <label class="form-check-label" for="allergy_macherel">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_macherel" value="allergy_macherel"/> <div class="font contents">고등어</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_오징어' %}
                     <label class="form-check-label" for="allergy_squid">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_squid" value="allergy_squid"/> <div class="font contents">오징어</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_게' %}
                     <label class="form-check-label" for="allergy_crab">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_crab" value="allergy_crab"/> <div class="font contents">게</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_조개류' %}
                     <label class="form-check-label" for="allergy_shellfish">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_shellfish" value="allergy_shellfish"/> <div class="font contents">조개류</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_돼지고기' %}
                     <label class="form-check-label" for="allergy_pork">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_pork" value="allergy_pork"/> <div class="font contents">돼지고기</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_쇠고기' %}
                     <label class="form-check-label" for="allergy_beef">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_beef" value="allergy_beef"/> <div class="font contents">쇠고기</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '알레르기_닭고기' %}
                     <label class="form-check-label" for="allergy_chicken">
                         <input class="form-check-input" type="checkbox" name="allergy" id="allergy_chicken" value="allergy_chicken"/> <div class="font contents">닭고기</div>
@@ -454,7 +489,7 @@
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_월요일' %}
                     <div class="font title">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -467,42 +502,42 @@
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_화요일' %}
                     <label class="form-check-label" for="diet_selected_tue">
                         <input class="form-check-input" type="checkbox" name="selected_recommenddiet" id="diet_selected_tue" value="diet_selected_tue"/> <div class="font contents">화요일</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_수요일' %}
                     <label class="form-check-label" for="diet_selected_wed">
                         <input class="form-check-input" type="checkbox" name="selected_recommenddiet" id="diet_selected_wed" value="diet_selected_wed"/> <div class="font contents">수요일</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_목요일' %}
                     <label class="form-check-label" for="diet_selected_thu">
                         <input class="form-check-input" type="checkbox" name="selected_recommenddiet" id="diet_selected_thu" value="diet_selected_thu"/> <div class="font contents">목요일</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_금요일' %}
                     <label class="form-check-label" for="diet_selected_fri">
                         <input class="form-check-input" type="checkbox" name="selected_recommenddiet" id="diet_selected_fri" value="diet_selected_fri"/> <div class="font contents">금요일</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_토요일' %}
                     <label class="form-check-label" for="diet_selected_sat">
                         <input class="form-check-input" type="checkbox" name="selected_recommenddiet" id="diet_selected_sat" value="diet_selected_sat"/> <div class="font contents">토요일</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_일요일' %}
                     <label class="form-check-label" for="diet_selected_sun">
                         <input class="form-check-input" type="checkbox" name="selected_recommenddiet" id="diet_selected_sun" value="diet_selected_sun"/> <div class="font contents">일요일</div>
@@ -511,7 +546,7 @@
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_아침' %}
                     <div class="font title">
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -524,14 +559,14 @@
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_점심' %}
                     <label class="form-check-label" for="diet_selected_lunch">
                         <input class="form-check-input" type="checkbox" name="selected_meal" id="diet_selected_lunch" value="diet_selected_lunch"/> <div class="font contents">점심</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '식단선택_저녁' %}
                     <label class="form-check-label" for="diet_selected_dinner">
                         <input class="form-check-input" type="checkbox" name="selected_meal" id="diet_selected_dinner" value="diet_selected_dinner"/> <div class="font contents">저녁</div>
@@ -540,7 +575,7 @@
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '간식_추천받음' %}
                         <div class="font title">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -549,20 +584,20 @@
                             <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                         </svg>간식 추천을 받으시겠습니까?</div>
                         <label class="form-check-label" for="recommendsnack_yes">
-                            <input class="form-check-input" type="radio" name="recommendsnack" id="recommendsnack_yes" /> <div class="font contents">예</div>
+                            <input class="form-check-input" type="radio" name="recommendsnack" id="recommendsnack_yes" value = "recommendsnack_yes"/> <div class="font contents">예</div>
                         </label>
                         {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '간식_추천거부' %}
                     <label class="form-check-label" for="recommendsnack_no">
-                        <input class="form-check-input" type="radio" name="recommendsnack" id="recommendsnack_no" /> <div class="font contents">아니요</div>
+                        <input class="form-check-input" type="radio" name="recommendsnack" id="recommendsnack_no" value = "recommendsnack_no" /> <div class="font contents">아니요</div>
                     </label>
                     <div style="margin-bottom:30px;"></div>
                     {% endif %}
                 </div>
                 
-                <div class="form-check marginleft_40">
+                {% comment %} <div class="form-check">
                     {% if choice.choice_label == '간식선택_오전' %}
                         <div class="font title">
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
@@ -571,30 +606,30 @@
                             <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
                         </svg>간식 추천받을 시간을 선택해주세요.(중복체크가능)</div>
                         <label class="form-check-label" for="snack_selected_morning">
-                            <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_morning" /> <div class="font contents">아침과 점심 사이</div>
+                            <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_morning" value = "snack_selected_morning"/> <div class="font contents">아침과 점심 사이</div>
                         </label>
                     {% endif %}
                 </div>
 
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '간식선택_오후' %}
                     <label class="form-check-label" for="snack_selected_afternoon">
                         <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_afternoon" value="snack_selected_afternoon"/> <div class="font contents">점심과 저녁 사이</div>
                     </label>
                     {% endif %}
                 </div>
-                <div class="form-check marginleft_40">
+                <div class="form-check">
                     {% if choice.choice_label == '간식선택_밤' %}
                     <label class="form-check-label" for="snack_selected_night">
                         <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_night" value="snack_selected_night"/> <div class="font contents">저녁이후</div>
                     </label>
                     <div style="margin-bottom:30px;"></div>
                     {% endif %}
-                </div>
+                </div> {% endcomment %}
 
             {% endfor %}
-            <div class="row justify-content-center" style="margin-top:50px; margin-left:-55px; margin-bottom:30px;width:1140px;">
-                <button class="btn btn-lg" type="submit" style="width:200px;">제출하기</button>
+            <div class="row justify-content-center">
+                <button class="btn btn-lg" type="submit" style="width:200px; margin-bottom:30px;">제출하기</button>
             </div>
         </form>
     </div>

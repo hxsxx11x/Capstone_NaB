@@ -39,14 +39,14 @@
   </head>
   <body>
     <nav class="navigator" style="min-width:400px">
-      <a class="logo" href="http://127.0.0.1:8000/account/">
+      <a class="logo" href="{% url 'account:profile'%}">
         <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
       </a>
     <ul style="float:right;">
-      <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/image/upload/">체성분 분석</a></li>
-      <li class="list_left"><a class="nav_a font">운동 및 식단</a></li>
-      <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/userInformation">마이페이지</a></li>
-      <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/logout">로그아웃</a></li>
+      <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
+      <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
+      <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+      <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
     </ul>
   </nav>
     <div class="container">

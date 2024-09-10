@@ -43,18 +43,37 @@
                 });
             });
         });
+        function doNotReloadKey(event) {
+            // Ctrl+N or Ctrl+R or F5를 누를 때 이벤트 취소, Ctrl+N의 경우 chrome에서 상관없음
+            if ((event.ctrlKey && (event.keyCode === 78 || event.keyCode === 82)) || (event.keyCode === 116 )) {
+                event.preventDefault(); // 기본 동작을 막음
+                event.stopPropagation(); // 이벤트 전파를 막음
+                return false;
+            }
+        }
+        function doNotBackNforwardKey(event){
+            if(event.altKey && (event.keyCode === 37 || event.keyCode === 38)){
+                event.preventDefault(); // 기본 동작을 막음
+                event.stopPropagation(); // 이벤트 전파를 막음
+                return false;
+            }
+        }
+        // 페이지 로드 시 keydown 이벤트 리스너를 추가
+        window.addEventListener('keydown', doNotReloadKey);
+        window.addEventListener('keydown', doNotBackNforwardKey);
+    
     </script>
 </head>
 <body>
     <nav class="navigator" style="min-width:400px">
-        <a class="logo" href="http://127.0.0.1:8000/account/">
+        <a class="logo" href="{% url 'account:profile'%}">
           <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
         </a>
       <ul style="float:right;">
-        <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/image/upload/">체성분 분석</a></li>
-        <li class="list_left"><a class="nav_a font">운동 및 식단</a></li>
-        <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/userInformation">마이페이지</a></li>
-        <li class="list_left"><a class="nav_a font" href="http://127.0.0.1:8000/account/logout">로그아웃</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
       </ul>
     </nav>
     <div>
@@ -209,9 +228,9 @@
             부상 부위에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
         </p>
         {% endif %}
-        <div class="row justify-content-center mt-4" style="margin-bottom:30px;">
-            <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
-        </div>
+    </div>
+    <div class="row justify-content-center mt-4" style="margin-bottom:30px;">
+        <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
     </div>
     </body>
 </html>

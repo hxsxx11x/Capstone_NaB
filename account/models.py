@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import BaseUserManager
-
+from django.utils import timezone
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -36,7 +36,7 @@ class CustomUser(AbstractUser):
 class SelectedWorkout(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     workout_name = models.CharField(max_length=100)
-    significant_body_part = models.CharField(max_length=50)
-
+    day = models.CharField(max_length=10, null=True)  # 요일을 저장하는 필드 추가, nullable로 변경_non-nullable인 경우에는 default값이 필요하다고 뜸
+    timelog = models.DateTimeField(default=timezone.localtime) #현재 시간으로 저장
     def __str__(self):
-        return f"{self.user.username}'s selected workout: {self.workout_name}"
+        return f"{self.user.username}'s selected workout: {self.workout_name} on {self.day}"
