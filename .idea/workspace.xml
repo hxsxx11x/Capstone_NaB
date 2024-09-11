@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용">
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/result.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/result.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/imageinput/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/imageinput/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/significants/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/significants/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" beforeDir="false" afterPath="$PROJECT_DIR$/significants/templates/significants/check_significants.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/significants/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/significants/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/biagraph.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/biagraph.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,7 +287,9 @@
       <workItem from="1715776672809" duration="21591000" />
       <workItem from="1718454111684" duration="2659000" />
       <workItem from="1718673546398" duration="5344000" />
-      <workItem from="1718820223013" duration="13559000" />
+      <workItem from="1718820223013" duration="14324000" />
+      <workItem from="1719027944875" duration="71000" />
+      <workItem from="1726066753411" duration="2840000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -422,7 +419,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718861520241</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화">
+      <option name="closed" value="true" />
+      <created>1718869916003</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1718869916003</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +475,8 @@
     <MESSAGE value="1차 데모" />
     <MESSAGE value="OCR 결과 확인 및 운동 설명 확인 기능 추가" />
     <MESSAGE value="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용" />
-    <option name="LAST_COMMIT_MESSAGE" value="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용" />
+    <MESSAGE value="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화" />
+    <option name="LAST_COMMIT_MESSAGE" value="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

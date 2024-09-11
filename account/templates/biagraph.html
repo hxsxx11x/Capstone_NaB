@@ -84,7 +84,7 @@
     <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
   </ul>
 </nav>
-  <h1 class="text-center bottom-border">체성분 기록</h1>
+      <h2 class="font text-center bottom-border" style="margin-top:10px;">체성분 기록</h2>
 <div style="padding-left:100px; padding-right:100px; padding-bottom:30px;">
     <div>
         <i class="bi bi-arrow-left back-btn" onclick="history.back()"></i>
@@ -116,10 +116,10 @@
       
               var options = {
                   chart: {
-                    //차트모양 변경 'bar', 'area', 'rader'로 변경가능
-                    type: 'line',
-                    width:'100%',
-                    height:'250%'
+                      //차트모양 변경 'bar', 'area', 'rader'로 변경가능
+                      type: 'line',
+                      width: '100%',
+                      height: '250%'
 
                   },
                   // colors:['#3357FF'], //색상변경
@@ -134,8 +134,13 @@
                       }
                   ],
                   xaxis: {
-                      categories: dates
-                  }
+                      categories: dates,
+                      tickAmount: 6,  // x축에 약 6개의 틱을 표시
+                      tickPlacement: 'on',
+                      labels: {
+                          rotate: -45,  // 레이블을 -45도 회전
+                          }
+                      }
               };
       
               var chart = new ApexCharts(document.querySelector("#chart"), options);
