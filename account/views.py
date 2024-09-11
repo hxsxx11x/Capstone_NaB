@@ -108,7 +108,12 @@ def biagraph_view(request):
         username = request.user.username
         account = CustomUser.objects.get(username=username)
         context = {'user': account}
-        return render(request, 'biagraph.html', context)
+        entries = UserBia.objects.filter(username=username).order_by('date')
+        dates = [entry.date.strftime("%Y-%m-%d") for entry in entries]
+        weights = [entry.weight for entry in entries]
+        bmi = [entry.bmi for entry in entries]
+
+        return render(request, 'biagraph.html', {'user': account, 'dates': dates, 'weights': weights, 'bmi': bmi})
     else:
         # 인증되지 않은 사용자는 로그인 페이지로 리디렉션
         return redirect('/')

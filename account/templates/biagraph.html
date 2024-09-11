@@ -18,6 +18,7 @@
       rel="shortcut icon"
       type="image/x-icon"
     />
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <style>
      
 
@@ -54,8 +55,8 @@
             border: 2px solid #ccc;
             border-radius: 10px;
             padding: 20px;
-            background-color: #f8f9fa;
-            height: 500px;
+            background-color: #FFFFFF;
+            height: 100%;
         }
 
         .meal-title {
@@ -84,7 +85,7 @@
   </ul>
 </nav>
   <h1 class="text-center bottom-border">체성분 기록</h1>
-<div class="container">
+<div style="padding-left:100px; padding-right:100px; padding-bottom:30px;">
     <div>
         <i class="bi bi-arrow-left back-btn" onclick="history.back()"></i>
         <span class="back-btn" onclick="history.back()">뒤로가기</span>
@@ -105,16 +106,51 @@
 
     <div class="graph-section">
         <h3 class="meal-title">체성분 기록 그래프</h3>
+        
+        <div id="chart"></div>
+          <script>
+              // django에서 데이터 전달
+              var dates = {{ dates|safe }};
+              var weights = {{ weights|safe }};
+              var bmi = {{ bmi|safe }};
+      
+              var options = {
+                  chart: {
+                    //차트모양 변경 'bar', 'area', 'rader'로 변경가능
+                    type: 'line',
+                    width:'100%',
+                    height:'250%'
+
+                  },
+                  // colors:['#3357FF'], //색상변경
+                  series: [
+                      {
+                          name: 'Weight',
+                          data: weights
+                      },
+                      {
+                          name: 'BMI',
+                          data: bmi
+                      }
+                  ],
+                  xaxis: {
+                      categories: dates
+                  }
+              };
+      
+              var chart = new ApexCharts(document.querySelector("#chart"), options);
+              chart.render();
+          </script>
     </div>
-    <div class="graph-section">
+
+    {% comment %} <div class="graph-section">
         <h3 class="meal-title">선택 날짜 체성분 정보</h3>
         <div class="date-info">
             <label for="selected-date">날짜 선택:</label>
             <input type="date" id="selected-date">
             <button onclick="changeDate()">선택</button>
         </div>
-    </div>
-        
+    </div> {% endcomment %}
     </div>
 </div>
 </body>
