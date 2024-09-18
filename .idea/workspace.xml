@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="오늘의 운동 기능 추가">
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="오늘의 운동 페이지 폰트 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/templates/workoutmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/workoutmenu.html" afterDir="false" />
     </list>
@@ -291,7 +291,7 @@
       <workItem from="1719027944875" duration="71000" />
       <workItem from="1726066753411" duration="3932000" />
       <workItem from="1726149466001" duration="847000" />
-      <workItem from="1726543137110" duration="8779000" />
+      <workItem from="1726543137110" duration="9316000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -445,7 +445,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726681902835</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="오늘의 운동 페이지 폰트 수정">
+      <option name="closed" value="true" />
+      <created>1726683009648</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1726683009648</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,7 +504,8 @@
     <MESSAGE value="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화" />
     <MESSAGE value="상단 타이틀 수정 및 그래프 가로축 수정" />
     <MESSAGE value="오늘의 운동 기능 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="오늘의 운동 기능 추가" />
+    <MESSAGE value="오늘의 운동 페이지 폰트 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="오늘의 운동 페이지 폰트 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

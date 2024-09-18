@@ -71,19 +71,25 @@
             text-align: right;
         }
         .rest-time {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
+            font-weight: bold;
             text-align: center;
             margin-bottom: 15px;
             color: #000000;
         }
+        .exercise-caption {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 5px;
+            color: #555;
+        }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.exercise-link').forEach(function(element) {
-                element.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    alert(this.dataset.caption);  // 클릭한 운동의 설명을 팝업으로 출력
-                });
+            document.querySelectorAll('.exercise-caption').forEach(function(element) {
+                var captionText = element.textContent;
+                // 마침표 뒤에 줄바꿈 태그 추가
+                element.innerHTML = captionText.replace(/\./g, '.<br>');
             });
         });
     </script>
@@ -100,16 +106,17 @@
                         <a href="#" class="exercise-link workout-name" data-caption="{{ workout.caption }}">{{ workout.name }}</a>
                         <div class="workout-reps">12회 × 4세트</div>
                     </div>
+                    <div class="exercise-caption">{{ workout.caption }}</div> <!-- 운동 설명을 추가 -->
                     {% if not forloop.last %}
                         <div class="rest-time"> ------------- 60초 간 휴식 ! ------------- </div>
                     {% endif %}
                 {% endfor %}
             </div>
-                <div class="warning" style="margin-top: 30px; font-size: 1.5rem; text-align: center; font-weight: bold; color: #333;">
-                     이 루틴은 참고용입니다! <br>
-                    개인의 수행 능력 및 컨디션에 따라<br>
-                    반복횟수 및 세트 수를 조절해주세요.
-                </div>
+            <div class="warning" style="margin-top: 30px; font-size: 1.5rem; text-align: center; font-weight: bold; color: #333;">
+                 이 루틴은 참고용입니다! <br>
+                개인의 수행 능력 및 컨디션에 따라<br>
+                반복횟수 및 세트 수를 조절해주세요.
+            </div>
         </div>
     </div>
 </body>
