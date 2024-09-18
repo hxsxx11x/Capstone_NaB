@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화">
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="상단 타이틀 수정 및 그래프 가로축 수정">
+      <change afterPath="$PROJECT_DIR$/account/templates/workoutmenu.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/biagraph.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/biagraph.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/migrations/0001_initial.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,8 +23,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -289,7 +293,9 @@
       <workItem from="1718673546398" duration="5344000" />
       <workItem from="1718820223013" duration="14324000" />
       <workItem from="1719027944875" duration="71000" />
-      <workItem from="1726066753411" duration="2840000" />
+      <workItem from="1726066753411" duration="3932000" />
+      <workItem from="1726149466001" duration="847000" />
+      <workItem from="1726543137110" duration="7635000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -427,7 +433,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718869916003</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="상단 타이틀 수정 및 그래프 가로축 수정">
+      <option name="closed" value="true" />
+      <created>1726070812876</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1726070812876</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,7 +490,8 @@
     <MESSAGE value="OCR 결과 확인 및 운동 설명 확인 기능 추가" />
     <MESSAGE value="OCR 속도 개선(CUDA 적용) &amp; Rule Engine 적용" />
     <MESSAGE value="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화" />
-    <option name="LAST_COMMIT_MESSAGE" value="운동 추천 요일 선택 로직 구현&#10;특이사항 선택 로직 안정화" />
+    <MESSAGE value="상단 타이틀 수정 및 그래프 가로축 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="상단 타이틀 수정 및 그래프 가로축 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -484,6 +499,11 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/imageinput/views.py</url>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/account/views.py</url>
+          <line>300</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

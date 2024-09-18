@@ -263,6 +263,30 @@ def select_workouts(significants):
     return day_workouts
 
 
+def show_today_workouts(request):
+    today = datetime.today().strftime('%A')  # 오늘의 요일을 영어로 가져오기
+    day_mapping = {'Monday': '월', 'Tuesday': '화', 'Wednesday': '수', 'Thursday': '목', 'Friday': '금', 'Saturday': '토',
+                   'Sunday': '일'}
+    current_day = day_mapping[today]  # 영어 요일을 한글로 변환
+
+    # 현재 사용자의 오늘 요일에 해당하는 운동 가져오기
+    selected_workouts = SelectedWorkout.objects.filter(user=request.user, day=current_day)
+
+    workout_data = []
+    for workout in selected_workouts:
+        workout_info = WorkoutData.objects.filter(name=workout.workout_name).first()
+        if workout_info:
+            workout_data.append({
+                'name': workout.workout_name,
+                'caption': workout_info.caption,
+            })
+
+    context = {
+        'workout_data': workout_data,
+        'today': current_day,
+    }
+    return render(request, 'workoutmenu.html', context)
+
 def result_view(request):
     current_username = request.user.username
     user_bia = UserBia.objects.filter(username=current_username).order_by('-bia_num').first()

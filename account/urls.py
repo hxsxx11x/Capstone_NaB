@@ -15,4 +15,5 @@ urlpatterns = [
     path('dietmenu/',dietmenu_view, name='dietmenu'),
     path('bia_graph/',biagraph_view,name='biagraph'),
     path('result/',result_view,name='result'),
+    path('today-workouts/', show_today_workouts, name='show_today_workouts'),
 ]

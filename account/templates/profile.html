@@ -77,7 +77,7 @@
                 </div>
               
                 <div class = "sm-30 border-item">
-                  <p href="{% url 'account:userInformation'%}">
+                  <a href="{% url 'account:show_today_workouts' %}">
                     <div class="icon-margin row justify-content-center" style="margin-top:40px;">
                       <svg xmlns="http://www.w3.org/2000/svg" width="55" height="60" fill="currentColor" class="bi bi-person-arms-up" viewBox="0 0 16 16">
                         <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
@@ -85,8 +85,7 @@
                       </svg>
                     </div>
                     <h5 class="text-center font">오늘의 운동</h5>
-                    <h6 class="text-center font">업데이트 예정</h6>
-                  </p>
+                  </a>
                 </div>
                 <div class = "sm-30 border-item">
                   <a href="{% url 'account:dietmenu'%}">

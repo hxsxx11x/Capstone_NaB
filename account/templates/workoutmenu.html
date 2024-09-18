@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>오늘의 운동</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f4f7fa;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .workout-section {
+            margin-top: 30px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            background-color: #e7f3ff;
+        }
+        .workout-title {
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .workout-list {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.exercise-link').forEach(function(element) {
+                element.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    alert(this.dataset.caption);  // 클릭한 운동의 설명을 팝업으로 출력
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>오늘의 운동</h1>
+        <div class="workout-section">
+            <h3 class="workout-title">{{ today }}요일의 운동</h3>
+            <div class="workout-list">
+                {% for workout in workout_data %}
+                    <div>
+                        <a href="#" class="exercise-link" data-caption="{{ workout.caption }}">{{ workout.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
