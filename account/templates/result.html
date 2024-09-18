@@ -33,7 +33,22 @@
         .table th, .table td {
             text-align: center;
         }
+
+        .meal-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .meal-table th, .meal-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+        .meal-table th {
+            background-color: #FFFF99;
+        }
     </style>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.exercise-link').forEach(function(element) {
@@ -69,12 +84,12 @@
         <a class="logo" href="{% url 'account:profile'%}">
           <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
         </a>
-      <ul style="float:right;">
-        <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
-        <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
-        <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
-        <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
-      </ul>
+        <ul style="float:right;">
+            <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
+            <li class="list_left"><a class="nav_a font" href="{% url 'account:biagraph'%}">체성분 기록</a></li>
+            <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+            <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
+        </ul>
     </nav>
     <div>
         <h1 class="font text-center bottom-border" style="margin-top:10px; margin-bottom:10px;">결과 확인</h1>
@@ -83,124 +98,93 @@
         
     <ol class="c-stepper" style="margin-top:30px;">
         <li class="c-stepper__item">
-          <h3 class="c-stepper__title">Step 1</h3>
-          <p class="c-stepper__desc">이미지 업로드</p>
+            <h3 class="c-stepper__title">Step 1</h3>
+            <p class="c-stepper__desc">이미지 업로드</p>
         </li>
         <li class="c-stepper__item">
             <h3 class="c-stepper__title">Step 2</h3>
             <p class="c-stepper__desc">OCR 결과 확인</p>
-          </li>
-        <li class="c-stepper__item">
-          <h3 class="c-stepper__title">Step 3</h3>
-          <p class="c-stepper__desc">특이사항 입력</p>
         </li>
         <li class="c-stepper__item">
-          <h3 class="c-stepper__title">Step 4</h3>
-          <p class="c-stepper__desc">결과 확인</p>
+            <h3 class="c-stepper__title">Step 3</h3>
+            <p class="c-stepper__desc">특이사항 입력</p>
         </li>
-      </ol>
-        <div class="status-title">{{ user_id }}님의 현재 상태는</div>
-        <div class="status-highlight">{{ status }}입니다!</div>
+        <li class="c-stepper__item">
+            <h3 class="c-stepper__title">Step 4</h3>
+            <p class="c-stepper__desc">결과 확인</p>
+        </li>
+    </ol>
+    <div class="status-title">{{ user_id }}님의 현재 상태는</div>
+    <div class="status-highlight">{{ status }}입니다!</div>
 
-        <div class="status-description">
-            {% if status == "저체중" %}
+    <div class="status-description">
+        {% if status == "저체중" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/Kvqsk7LB/image.png"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/Kvqsk7LB/image.png" style="height:330px;">
             </div>
             <p>체중이 평균치보다 낮고 근육량도 적어요!<br>
             저체중이 지속되면 빈혈 등 건강 문제로 이어질 수 있어요.<br>
             근력 위주의 운동과 증량 목적의 식단을 추천해드릴게요!</p>
 
-            {% elif status == "적정체중" %}
+        {% elif status == "적정체중" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/qRTmV1VV/image.png"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/qRTmV1VV/image.png" style="height:330px;">
             </div>
             <p>체중과 근육량, 체지방률이 평균치에 가까워요!<br>
-            현재 체중을 유지하며 근육량을 늘리면 더 건강해질 수 있어요.
+            현재 체중을 유지하며 근육량을 늘리면 더 건강해질 수 있어요.<br>
             근력 위주의 운동과 식단을 추천해드릴게요!</p>
 
-            {% elif status == "근육형 적정체중" %}
+        {% elif status == "근육형 적정체중" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/pdzLZ7qq/image.jpg"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/pdzLZ7qq/image.jpg" style="height:330px;">
             </div>
             <p>체중이 평균치에 가깝고 근육량이 평균 이상이에요!<br>
             현재 체중을 유지하며 꾸준히 운동하면 건강 걱정은 없겠어요.<br>
             근력 위주의 운동과 식단을 추천해드릴게요!</p>
 
-            {% elif status == "근육형 과체중" %}
+        {% elif status == "근육형 과체중" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/QxFsmwM1/image.jpg"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/QxFsmwM1/image.jpg" style="height:330px;">
             </div>
             <p>체중이 평균치보다 조금 높지만, 근육량도 평균 이상이에요!<br>
             체중을 조금 감량하며 꾸준히 운동하면 더 건강해질 수 있어요.<br>
             체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
 
-            {% elif status == "과체중" %}
+        {% elif status == "과체중" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/SskGtjCm/image.png"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/SskGtjCm/image.png" style="height:330px;">
             </div>
             <p>체중이 평균치보다 조금 높아요!<br>
             체중을 조금 감량하며 근육량을 늘리면 금방 적정 체중이 될 수 있어요.<br>
             체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
 
-            {% elif status == "1단계 비만" %}
+        {% elif status == "1단계 비만" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/RhbQFR80/1.png"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/RhbQFR80/1.png" style="height:330px;">
             </div>
             <p>체중과 체지방률이 높아요!<br>
             운동과 식단을 병행하며 체중 감량을 해야 건강을 유지할 수 있어요.<br>
             체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
 
-            {% elif status == "2단계 비만" %}
+        {% elif status == "2단계 비만" %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/NjX7sRxg/2.png"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/NjX7sRxg/2.png" style="height:330px;">
             </div>
             <p>체중과 체지방률이 많이 높아요!<br>
             당장 체중을 감량하지 않으면 성인병의 위험이 매우 높아요.<br>
             체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
 
-            {% else %}
+        {% else %}
             <div class="row justify-content-center" style="margin-bottom:20px;">
-                <img 
-                src="https://i.postimg.cc/TPqVmGSF/3.png"
-                style="height:330px;"
-                >
-                </img>
+                <img src="https://i.postimg.cc/TPqVmGSF/3.png" style="height:330px;">
             </div>
             <p>체중과 체지방률이 위험한 수준이에요!<br>
             고도 비만으로 분류되며 체중 감량이 없으면 건강이 위험해요.<br>
-            체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>{% endif %}
-        </div>
-
-        <div class="container mt-5">
+            체중 감량 위주의 운동과 식단을 추천해드릴게요!</p>
+        {% endif %}
+    </div>
+    {%if day_workouts %}
+        <div class="container mt-5" style="background-color: #e7f3ff; padding: 20px; border-radius: 10px;">
             <h3 class="text-center">{{ user_id }}님의 주간 운동 계획</h3>
             <table class="table">
                 <thead>
@@ -218,17 +202,87 @@
                                     <a href="#" class="exercise-link" data-caption="{{ exercise.caption }}">{{ exercise.name }}</a>{% if not forloop.last %}, {% endif %}
                                 {% endfor %}
                             </td>
-                        {% endfor %}
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-        {% if is_issue %}
-        <p style="font-size: 1.2rem" class="text-center mt-4">
+    {%endif%}
+
+    {% if is_issue %}
+        <div class="alert alert-warning text-center mt-4" style="font-size: 1.2rem; border-radius: 10px; padding: 20px;">
             부상이 있으시다고 체크해주셨기 때문에,<br>
             부상 부위에 부담이 가는 운동은 제외하고 루틴을 구성했어요!
-        </p>
-        {% endif %}
-    </div>
+        </div>
+    {% endif %}
+
+    {%if day_diets%}
+        <div class="status-highlight" style="font-size: 2rem; text-align: center; margin: 20px 0; padding: 10px; border: 2px solid #007bff; border-radius: 10px; background-color: #f0f8ff;">
+            {{ user_id }}님의 목표 섭취 칼로리: {{ user_bmr }}
+            <h5 style="margin-top:5px;">목표 섭취 칼로리에 맞춰서 식단을 구성했어요!</h5>
+        </div>
+        
+        <div class="container mt-5" style="background-color: #f0fff0; padding: 20px; border-radius: 10px;">
+            <h3 class="text-center">{{ user_id }}님의 주간 식단 계획</h3>
+            <table class="meal-table">
+                <thead>
+                    <tr>
+                        <th>식사 시간</th>
+                        <th>월</th>
+                        <th>화</th>
+                        <th>수</th>
+                        <th>목</th>
+                        <th>금</th>
+                        <th>토</th>
+                        <th>일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>아침</td>
+                        <td>{{ day_diets.월.아침|join:", " }}</td>
+                        <td>{{ day_diets.화.아침|join:", " }}</td>
+                        <td>{{ day_diets.수.아침|join:", " }}</td>
+                        <td>{{ day_diets.목.아침|join:", " }}</td>
+                        <td>{{ day_diets.금.아침|join:", " }}</td>
+                        <td>{{ day_diets.토.아침|join:", " }}</td>
+                        <td>{{ day_diets.일.아침|join:", " }}</td>
+                    </tr>
+                    <tr>
+                        <td>점심</td>
+                        <td>{{ day_diets.월.점심|join:", " }}</td>
+                        <td>{{ day_diets.화.점심|join:", " }}</td>
+                        <td>{{ day_diets.수.점심|join:", " }}</td>
+                        <td>{{ day_diets.목.점심|join:", " }}</td>
+                        <td>{{ day_diets.금.점심|join:", " }}</td>
+                        <td>{{ day_diets.토.점심|join:", " }}</td>
+                        <td>{{ day_diets.일.점심|join:", " }}</td>
+                    </tr>
+                    <tr>
+                        <td>저녁</td>
+                        <td>{{ day_diets.월.저녁|join:", " }}</td>
+                        <td>{{ day_diets.화.저녁|join:", " }}</td>
+                        <td>{{ day_diets.수.저녁|join:", " }}</td>
+                        <td>{{ day_diets.목.저녁|join:", " }}</td>
+                        <td>{{ day_diets.금.저녁|join:", " }}</td>
+                        <td>{{ day_diets.토.저녁|join:", " }}</td>
+                        <td>{{ day_diets.일.저녁|join:", " }}</td>
+                    </tr>
+                    <tr>
+                        <td>간식</td>
+                        <td>{{ day_diets.월.간식|join:", " }}</td>
+                        <td>{{ day_diets.화.간식|join:", " }}</td>
+                        <td>{{ day_diets.수.간식|join:", " }}</td>
+                        <td>{{ day_diets.목.간식|join:", " }}</td>
+                        <td>{{ day_diets.금.간식|join:", " }}</td>
+                        <td>{{ day_diets.토.간식|join:", " }}</td>
+                        <td>{{ day_diets.일.간식|join:", " }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {%endif%}
+
     <div class="row justify-content-center mt-4" style="margin-bottom:30px;">
         <a href="{% url 'account:profile' %}" class="btn">메인 화면으로 돌아갈까요?</a>
     </div>

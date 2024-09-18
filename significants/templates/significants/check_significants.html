@@ -43,12 +43,12 @@
         <a class="logo" href="{% url 'account:profile'%}">
           <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
         </a>
-      <ul style="float:right;">
-        <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
-        <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
-        <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
-        <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
-      </ul>
+        <ul style="float:right;">
+            <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
+            <li class="list_left"><a class="nav_a font" href="{% url 'account:biagraph'%}">체성분 기록</a></li>
+            <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+            <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
+        </ul>
     </nav>
     <h1 class="text-center bottom-border font" style="margin-top:10px; margin-bottom:10px;">특이사항 입력</h1>
     
@@ -596,37 +596,6 @@
                     <div style="margin-bottom:30px;"></div>
                     {% endif %}
                 </div>
-                
-                {% comment %} <div class="form-check">
-                    {% if choice.choice_label == '간식선택_오전' %}
-                        <div class="font title">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-clipboard-heart" viewBox="0 0 16 16" style="margin-right:10px;">
-                            <path fill-rule="evenodd" d="M5 1.5A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5zm5 0a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5z"/>
-                            <path d="M3 1.5h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2"/>
-                            <path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.31 8 6.982"/>
-                        </svg>간식 추천받을 시간을 선택해주세요.(중복체크가능)</div>
-                        <label class="form-check-label" for="snack_selected_morning">
-                            <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_morning" value = "snack_selected_morning"/> <div class="font contents">아침과 점심 사이</div>
-                        </label>
-                    {% endif %}
-                </div>
-
-                <div class="form-check">
-                    {% if choice.choice_label == '간식선택_오후' %}
-                    <label class="form-check-label" for="snack_selected_afternoon">
-                        <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_afternoon" value="snack_selected_afternoon"/> <div class="font contents">점심과 저녁 사이</div>
-                    </label>
-                    {% endif %}
-                </div>
-                <div class="form-check">
-                    {% if choice.choice_label == '간식선택_밤' %}
-                    <label class="form-check-label" for="snack_selected_night">
-                        <input class="form-check-input" type="checkbox" name="selected_snack" id="snack_selected_night" value="snack_selected_night"/> <div class="font contents">저녁이후</div>
-                    </label>
-                    <div style="margin-bottom:30px;"></div>
-                    {% endif %}
-                </div> {% endcomment %}
-
             {% endfor %}
             <div class="row justify-content-center">
                 <button class="btn btn-lg" type="submit" style="width:200px; margin-bottom:30px;">제출하기</button>

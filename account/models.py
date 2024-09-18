@@ -40,3 +40,14 @@ class SelectedWorkout(models.Model):
     timelog = models.DateTimeField(default=timezone.localtime) #현재 시간으로 저장
     def __str__(self):
         return f"{self.user.username}'s selected workout: {self.workout_name} on {self.day}"
+
+
+class SelectedDiet(models.Model):
+    diet_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    diet_name = models.CharField(max_length=100)
+    day = models.CharField(max_length=10, null=True)  # 요일을 저장하는 필드 추가, nullable로 변경_non-nullable인 경우에는 default값이 필요하다고 뜸
+    meal = models.name = models.CharField(max_length=20, null=True)
+    timelog = models.DateTimeField(default=timezone.localtime) #현재 시간으로 저장
+    def __str__(self):
+        return f"{self.user.username}'s selected workout: {self.workout_name} on {self.day}"

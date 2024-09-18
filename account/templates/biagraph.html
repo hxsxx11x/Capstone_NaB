@@ -73,16 +73,16 @@
     </style>
 </head>
 <body>
-  <nav class="navigator" style="min-width:400px">
+<nav class="navigator" style="min-width:400px">
     <a class="logo" href="{% url 'account:profile'%}">
-      <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
+    <img src="https://i.postimg.cc/kG1hkr9z/image.png" alt="Logo">
     </a>
-  <ul style="float:right;">
-    <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
-    <li class="list_left"><a class="nav_a font" href="{% url 'account:dietmenu'%}">운동 및 식단</a></li>
-    <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
-    <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
-  </ul>
+    <ul style="float:right;">
+        <li class="list_left"><a class="nav_a font" href="{% url 'image:upload'%}">체성분 분석</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:biagraph'%}">체성분 기록</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:userInformation'%}">마이페이지</a></li>
+        <li class="list_left"><a class="nav_a font" href="{% url 'account:logout'%}">로그아웃</a></li>
+    </ul>
 </nav>
       <h2 class="font text-center bottom-border" style="margin-top:10px;">체성분 기록</h2>
 <div style="padding-left:100px; padding-right:100px; padding-bottom:30px;">

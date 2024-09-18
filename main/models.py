@@ -186,3 +186,18 @@ class WorkoutData(models.Model):
     class Meta:
         managed = False
         db_table = 'workout_data'
+
+class DietMenu(models.Model):
+    menu_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100)
+    serving = models.FloatField()
+    calorie = models.FloatField()
+    carbohydrate = models.FloatField()
+    protein = models.FloatField()
+    province = models.FloatField()
+    type1 = models.CharField(max_length=100)
+    type2 = models.CharField(max_length=100)
+    etc = models.CharField(max_length=100)
+    class Meta:
+        managed = False
+        db_table = 'diet_menu'
