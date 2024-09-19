@@ -577,7 +577,7 @@ def select_diet(user, significants, _final_user_bmr):
     meals = {'breakfast': '아침', 'lunch': '점심', 'dinner': '저녁'}
     selected_diet_meals = [meals[meal] for meal in ['breakfast', 'lunch', 'dinner'] if
                      f'diet_selected_{meal}' in significants]
-   
+
     print(f"{selected_diet_meals}")
    
     selected_diet_meals_count= len(selected_diet_meals)
@@ -589,6 +589,11 @@ def select_diet(user, significants, _final_user_bmr):
     if selected_diet_meals_count == 0:
         selected_diet_meals = [meals[meal] for meal in ['breakfast', 'lunch', 'dinner']]
         unselected_diet_meals = None
+    
+    if 'recommendsnack' in significants:
+        selected_diet_meals.append('간식')
+
+    print(f"{selected_diet_meals}")
 
     # 식사에서 탄수화물
     carbohydrate_diet = DietMenu.objects.filter(type1 = '탄수화물', type2 = '식사')
@@ -819,6 +824,7 @@ def select_diet(user, significants, _final_user_bmr):
         print(f"result_snack: {snack}")
     elif 'recommendsnack_no' in significants:
         snack = None
+    
 
 
     # '반찬' '김치' => '반찬', '김치' 로 수정
@@ -948,10 +954,10 @@ def select_diet(user, significants, _final_user_bmr):
                     elif _type == '김치':
                         day_diet[day][meal_time].extend(kimchi.values_list('name', flat=True))
                     elif _type == '간식':
-                        if snack==None:
-                            day_diet[day][meal_time] = ['식단 추천 없음']
-                        else:
+                        if snack!=None and snack: #간식추천이면서, 간식에 데이터가 있는 경우
                             day_diet[day][meal_time].extend(snack.values_list('name', flat=True))
+                        else:
+                            day_diet[day][meal_time] = ['식단 추천 없음']
                     else:
                         day_diet[day][meal_time] = ['식단 추천 없음']
             elif meal_time.strip() in [m.strip() for m in unselected_diet_meals]:
@@ -959,7 +965,6 @@ def select_diet(user, significants, _final_user_bmr):
                     day_diet[day][meal_time] = ['식단 추천 없음']
             else:
                 day_diet[day][meal_time] = ['식단 추천 없음']
-
 
     # 결과 출력
     print(f"selected_days: {selected_days}")
