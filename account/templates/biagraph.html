@@ -51,12 +51,16 @@
         }
 
         .graph-section {
+            text-align: center;
             margin-top: 30px;
             border: 2px solid #ccc;
             border-radius: 10px;
             padding: 20px;
             background-color: #FFFFFF;
             height: 100%;
+            width: 40%;
+            margin-left: auto; 
+            margin-right: auto; 
         }
 
         .meal-title {
@@ -115,46 +119,35 @@
               var bmi = {{ bmi|safe }};
               var skeletal = {{ skeletal|safe }};
               var fat_per = {{ fat_per|safe }};
+              var fat = {{ fat|safe }};
 
-              var options = {
-                  chart: {
-                      //차트모양 변경 'bar', 'area', 'rader'로 변경가능
-                      type: 'line',
-                      width: '100%',
-                      height: '250%'
+var options = {
+    chart: {
+        type: 'line',
+        height: '500px' // 고정된 높이 설정
+    },
+    series: [
+        { name: '몸무게', data: weights },
+        { name: '골격근량', data: skeletal },
+        { name: '체지방량', data: fat },
+        { name: '체지방률', data: fat_per },
+    ],
+    xaxis: {
+        categories: dates
+    },
+    yaxis: {
+        min: function(min) {
+            return Math.floor(min * 0.95); // 데이터 최소값보다 약간 낮게 설정
+        },
+        max: function(max) {
+            return Math.ceil(max * 1.05); // 데이터 최대값보다 약간 높게 설정
+        }
+    }
+};
 
-                  },
-                  // colors:['#3357FF'], //색상변경
-                  series: [
-                      {
-                          name: 'Weight',
-                          data: weights
-                      },
-                      {
-                        name: 'Skeletal',
-                        data: skeletal
-                    },
-                    {
-                        name: 'percent_fat',
-                        data: fat_per
-                    },
-                      {
-                          name: 'BMI',
-                          data: bmi
-                      }
-                  ],
-                  xaxis: {
-                      categories: dates,
-                      tickAmount: 6,  // x축에 약 6개의 틱을 표시
-                      tickPlacement: 'on',
-                      labels: {
-                          rotate: -45,  // 레이블을 -45도 회전
-                          }
-                      }
-              };
-      
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
           </script>
     </div>
 
