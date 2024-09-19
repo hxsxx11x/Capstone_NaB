@@ -102,23 +102,37 @@
                 </script>
             </div>
         </div>
-
-        <div class="meal-section">
-            <h3 class="meal-title">아침 식단 정보</h3>
-            <div class="text-center" style="padding:30px; font-size: 20px;">{{ today_diets.아침|join:"<br>" }}</div>
-        </div>
-        <div class="meal-section">
-            <h3 class="meal-title">점심 식단 정보</h3>
-            <div class="text-center" style="padding:30px; font-size: 20px;">{{ today_diets.점심|join:"<br>" }}</div>
-        </div>
-        <div class="meal-section">
-            <h3 class="meal-title">저녁 식단 정보</h3>
-            <div class="text-center" style="padding:30px; font-size: 20px;">{{ today_diets.저녁|join:"<br>" }}</div>
-        </div>
-        <div class="snack-section">
-            <h3 class="meal-title">간식 식단 정보</h3>
-            <div class="text-center" style="padding:30px; font-size: 20px;">{{ today_diets.간식|join:"<br>" }}</div>
-        </div>
+    
+    <div class="meal-section">
+    <h1 class="text-center bottom-border" style="color:black">오늘의 식단</h1>
+    {% for meal_time, items in nutrition_info.items %}
+    <h3 class="meal-title">{{ meal_time }} 식단 정보</h3>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th class="text-center">식단</th>
+                <th class="text-center">양 (g)</th>
+                <th class="text-center">칼로리 (kcal)</th>
+                <th class="text-center">탄수화물 (g)</th>
+                <th class="text-center">단백질 (g)</th>
+                <th class="text-center">지방 (g)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td class="text-center">{{ item.name }}</td>
+                <td class="text-center">{{ item.serving }}</td>
+                <td class="text-center">{{ item.calorie }}</td>
+                <td class="text-center">{{ item.carbohydrate }}</td>
+                <td class="text-center">{{ item.protein }}</td>
+                <td class="text-center">{{ item.fat }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+    </div>
     </div>
 </body>
 </html>

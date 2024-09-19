@@ -10,6 +10,7 @@ from .models import CustomUser, CustomUserManager, SelectedWorkout
 from .forms import UserForm, UserUpdateForm
 from django.contrib.auth.decorators import login_required
 from .models import SelectedWorkout, SelectedDiet
+
 from django.utils import timezone
 from datetime import datetime
 
@@ -97,32 +98,37 @@ def dietmenu_view(request):
     if request.user.is_authenticated:
         username = request.user.username
         account = CustomUser.objects.get(username=username)
-        
         today = datetime.today()
-
-        # 요일을 숫자로 가져오기 (0=월요일, 1=화요일, ...)
         day_of_week = today.weekday()
-
-        # 요일을 한글로 매핑
         days_in_korean = ['월', '화', '수', '목', '금', '토', '일']
-
-        # 오늘의 요일 출력
-        print("현재 요일:", days_in_korean[day_of_week])
         current_day = days_in_korean[day_of_week]
-        
+
         if SelectedDiet.objects.filter(user=request.user).exists():
             diets = get_saved_diets(request.user)
-            print(f"{diets}")
             current_meal_plan = diets[current_day]
 
-            context = {'user': account,'today_diets':current_meal_plan,}
-            return render(request, 'dietmenu.html', context)
+            # Fetch nutritional info for each diet item
+            nutrition_info = {}
+            for meal_time, items in current_meal_plan.items():
+                nutrition_info[meal_time] = []
+                for item in items:
+                    diet_data = DietMenu.objects.filter(name=item).first()
+                    if diet_data:
+                        nutrition_info[meal_time].append({
+                            'name': diet_data.name,
+                            'serving': diet_data.serving,
+                            'calorie': diet_data.calorie,
+                            'carbohydrate': diet_data.carbohydrate,
+                            'protein': diet_data.protein,
+                            'fat': diet_data.province
+                        })
 
+            context = {'user': account, 'today_diets': current_meal_plan, 'nutrition_info': nutrition_info}
+            return render(request, 'dietmenu.html', context)
         else:
-            context = {'user': account,}
+            context = {'user': account}
         return render(request, 'dietmenu.html', context)
     else:
-        # 인증되지 않은 사용자는 로그인 페이지로 리디렉션
         return redirect('/')
 
 def biagraph_view(request):

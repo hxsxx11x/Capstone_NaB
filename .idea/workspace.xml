@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="메인페이지 및 그래프 가독성 수정">
+    <list default="true" id="6b90ea26-5665-481c-a9bf-773026f4d62a" name="변경" comment="식단 가독성 수정">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NaB/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/NaB/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/account/templates/dietmenu.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/dietmenu.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -293,7 +293,7 @@
       <workItem from="1719027944875" duration="71000" />
       <workItem from="1726066753411" duration="3932000" />
       <workItem from="1726149466001" duration="847000" />
-      <workItem from="1726543137110" duration="19105000" />
+      <workItem from="1726543137110" duration="20828000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <option name="closed" value="true" />
@@ -471,7 +471,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726724036490</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="식단 가독성 수정">
+      <option name="closed" value="true" />
+      <created>1726726974510</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1726726974510</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,7 +533,8 @@
     <MESSAGE value="오늘의 운동 페이지 폰트 수정" />
     <MESSAGE value="오늘의 운동 페이지에 운동 설명이 출력되도록 수정" />
     <MESSAGE value="메인페이지 및 그래프 가독성 수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="메인페이지 및 그래프 가독성 수정" />
+    <MESSAGE value="식단 가독성 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="식단 가독성 수정" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -536,7 +545,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/account/views.py</url>
-          <line>303</line>
+          <line>309</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -549,10 +558,10 @@
       </default-breakpoints>
     </breakpoint-manager>
     <watches-manager>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/account/views.py" line="17">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/account/views.py" line="18">
         <watch expression="form.is_valid()" />
       </inline-watch>
-      <inline-watch fileUrl="file://$PROJECT_DIR$/account/views.py" line="17">
+      <inline-watch fileUrl="file://$PROJECT_DIR$/account/views.py" line="18">
         <watch expression="form.is_valid()" />
       </inline-watch>
     </watches-manager>

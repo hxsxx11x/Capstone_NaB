@@ -50,4 +50,4 @@ class SelectedDiet(models.Model):
     meal = models.name = models.CharField(max_length=20, null=True)
     timelog = models.DateTimeField(default=timezone.localtime) #현재 시간으로 저장
     def __str__(self):
-        return f"{self.user.username}'s selected workout: {self.workout_name} on {self.day}"
+        return f"{self.user.username}'s selected diet: {self.diet_name} on {self.day}"
