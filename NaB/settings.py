@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-5az!vlba5_omy85n+5r8o9jf^i9=qq@yl7la3cit@6c9c$j5sq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['steady-mistakenly-yeti.ngrok-free.app', 'localhost', '127.0.0.1']
+
 
 
 # Application definition
@@ -53,14 +54,14 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'NaB.urls'
-CSRF_TRUSTED_ORIGINS = ["https://steady-mistakenly-yeti.ngrok-free.app"]
+CSRF_TRUSTED_ORIGINS = ['https://steady-mistakenly-yeti.ngrok-free.app']
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
