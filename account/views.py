@@ -133,8 +133,10 @@ def biagraph_view(request):
         dates = [entry.date.strftime("%Y-%m-%d") for entry in entries]
         weights = [entry.weight for entry in entries]
         bmi = [entry.bmi for entry in entries]
+        skeletal = [entry.skeletal for entry in entries]
+        fat_per = [entry.fat_per for entry in entries]
 
-        return render(request, 'biagraph.html', {'user': account, 'dates': dates, 'weights': weights, 'bmi': bmi})
+        return render(request, 'biagraph.html', {'user': account, 'dates': dates, 'weights': weights, 'bmi': bmi,'skeletal':skeletal, 'fat_per':fat_per})
     else:
         # 인증되지 않은 사용자는 로그인 페이지로 리디렉션
         return redirect('/')

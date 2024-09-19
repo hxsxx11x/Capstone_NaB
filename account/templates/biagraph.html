@@ -113,7 +113,9 @@
               var dates = {{ dates|safe }};
               var weights = {{ weights|safe }};
               var bmi = {{ bmi|safe }};
-      
+              var skeletal = {{ skeletal|safe }};
+              var fat_per = {{ fat_per|safe }};
+
               var options = {
                   chart: {
                       //차트모양 변경 'bar', 'area', 'rader'로 변경가능
@@ -128,6 +130,14 @@
                           name: 'Weight',
                           data: weights
                       },
+                      {
+                        name: 'Skeletal',
+                        data: skeletal
+                    },
+                    {
+                        name: 'percent_fat',
+                        data: fat_per
+                    },
                       {
                           name: 'BMI',
                           data: bmi
